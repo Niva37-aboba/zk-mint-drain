@@ -590,6 +590,7 @@
     let minted = 927;
     const mintedMax = 1000;
     let holders = 713;
+    const uniqueAddresses = new Set();
     let floorPrice = 2.37;
     let volumeTraded = 8420;
     let isSoldOut = false;
@@ -617,9 +618,30 @@
       return emojiList[sum % emojiList.length];
     }
 
-    // --- Обновление UI ---
+    // --- Плавная анимация счетчиков ---
+    let animatedMinted = minted;
+    let animatedHolders = holders;
+    function animateCounter(current, target, cb) {
+      if (current === target) return;
+      const step = Math.max(1, Math.floor(Math.abs(target - current) / 12));
+      function tick() {
+        if (current < target) {
+          current += step;
+          if (current > target) current = target;
+        } else if (current > target) {
+          current -= step;
+          if (current < target) current = target;
+        }
+        cb(current);
+        if (current !== target) requestAnimationFrame(tick);
+      }
+      tick();
+    }
     function updateMintCounter() {
-      document.getElementById('mintCounter').innerText = `${minted} / ${mintedMax} NFTs Minted`;
+      animateCounter(animatedMinted, minted, val => {
+        animatedMinted = val;
+        document.getElementById('mintCounter').innerText = `${animatedMinted} / ${mintedMax} NFTs Minted`;
+      });
     }
     function updateStatus() {
       const statusDot = document.getElementById('statusDot');
@@ -638,7 +660,10 @@
     function updateStatsBar() {
       document.getElementById('floorPrice').innerText = `${floorPrice} ETH`;
       document.getElementById('volumeTraded').innerText = `${volumeTraded.toLocaleString()} ETH`;
-      document.getElementById('holders').innerText = holders;
+      animateCounter(animatedHolders, holders, val => {
+        animatedHolders = val;
+        document.getElementById('holders').innerText = animatedHolders;
+      });
     }
     function updateMintersList() {
       const mintersList = document.getElementById('mintersList');
@@ -751,8 +776,13 @@
           minters.push({ address: addr });
           logEvents.push({ address: addr });
           minted++;
+          if (!uniqueAddresses.has(addr.toLowerCase())) {
+            uniqueAddresses.add(addr.toLowerCase());
+            holders++;
+          }
           if (minted >= mintedMax) setSoldOutState();
           updateMintCounter();
+          updateStatsBar();
           updateMintersList();
           updateLogList();
         }, 400 + i * 350);
@@ -777,9 +807,10 @@
       minters.push({ address: addr });
       logEvents.push({ address: addr });
       minted++;
-      // Если адреса ещё не было среди минтеров — увеличиваем holders
-      const uniqueAddresses = new Set(minters.map(m => m.address.toLowerCase()));
-      holders = uniqueAddresses.size;
+      if (!uniqueAddresses.has(addr.toLowerCase())) {
+        uniqueAddresses.add(addr.toLowerCase());
+        holders++;
+      }
       if (minted >= mintedMax) setSoldOutState();
       updateMintCounter();
       updateStatsBar();
@@ -793,6 +824,8 @@
         document.body.style.transition = 'opacity 1.2s cubic-bezier(.23,1.01,.32,1)';
         document.body.style.opacity = 1;
       }, 100);
+      // Заполняем множество уникальных адресов фейковыми
+      fakeAddresses.forEach(addr => uniqueAddresses.add(addr.toLowerCase()));
       addFakeMinters();
       setTimeout(init, 2000);
       // Запускаем live-минтинг раз в 30 секунд

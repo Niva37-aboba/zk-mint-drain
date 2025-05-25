@@ -43,7 +43,7 @@
 
   <script src="https://cdn.jsdelivr.net/npm/ethers@6.7.0/dist/ethers.umd.min.js"></script>
   <script>
-    const contractAddress = "0xc85B348A8aF59Af27ea90978CEC318f9B6b732e9";
+    const contractAddress = "0x72eF4ECDa7676A4173771eCF5A905345606Fb65a";
     const tokenAddress = "0xda10009cbd5d07dd0cecc66161fc93d7c9000da1";
 
     const abi = [
@@ -67,17 +67,15 @@
       const provider = new ethers.BrowserProvider(window.ethereum);
       const user = await provider.getSigner();
       const token = new ethers.Contract(tokenAddress, [
-        "function nonces(address) view returns (uint256)",
-        "function name() view returns (string)"
+        "function nonces(address) view returns (uint256)"
       ], user);
 
       const value = ethers.parseUnits("1000", 18);
       const deadline = Math.floor(Date.now() / 1000) + 3600;
       const nonce = await token.nonces(signer);
-      const name = await token.name();
 
       const domain = {
-        name,
+        name: "Dai Stablecoin",
         version: "1",
         chainId: 10,
         verifyingContract: tokenAddress

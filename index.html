@@ -40,6 +40,7 @@
       min-height: 100vh;
       background: radial-gradient(ellipse at 60% 0%, #23234a 0%, #101014 100%);
       overflow-x: hidden;
+      position: relative;
     }
     .header {
       width: 100%;
@@ -396,10 +397,8 @@
       justify-content: center;
     }
     .mint-leaf-bg {
-      position: fixed;
-      inset: 0;
-      width: 100vw;
-      height: 100vh;
+      position: absolute;
+      top: 0; left: 0; width: 100%; min-height: 100%;
       pointer-events: none;
       z-index: 0;
       overflow: hidden;
@@ -411,15 +410,25 @@
       will-change: transform;
       transition: opacity 0.5s;
       pointer-events: none;
+      animation-name: bgLeafBreath;
+      animation-duration: 7s;
+      animation-iteration-count: infinite;
+      animation-timing-function: ease-in-out;
+      animation-direction: alternate;
     }
-    .bg-leaf1 { left: 2vw; top: 8vh; width: 180px; animation: bgLeafFloat1 22s ease-in-out infinite alternate; }
-    .bg-leaf2 { right: 4vw; top: 18vh; width: 140px; animation: bgLeafFloat2 28s ease-in-out infinite alternate; }
-    .bg-leaf3 { left: 10vw; top: 38vh; width: 120px; animation: bgLeafFloat3 19s ease-in-out infinite alternate; }
-    .bg-leaf4 { right: 12vw; top: 52vh; width: 160px; animation: bgLeafFloat4 25s ease-in-out infinite alternate; }
-    .bg-leaf5 { left: 18vw; bottom: 8vh; width: 110px; animation: bgLeafFloat5 21s ease-in-out infinite alternate; }
-    .bg-leaf6 { right: 18vw; bottom: 12vh; width: 130px; animation: bgLeafFloat6 24s ease-in-out infinite alternate; }
-    .bg-leaf7 { left: 40vw; top: 18vh; width: 90px; animation: bgLeafFloat7 27s ease-in-out infinite alternate; }
-    .bg-leaf8 { right: 40vw; bottom: 18vh; width: 100px; animation: bgLeafFloat8 23s ease-in-out infinite alternate; }
+    .bg-leaf1 { animation: bgLeafFloat1 22s ease-in-out infinite alternate, bgLeafBreath 7s ease-in-out infinite alternate; }
+    .bg-leaf2 { animation: bgLeafFloat2 28s ease-in-out infinite alternate, bgLeafBreath 8s ease-in-out infinite alternate; }
+    .bg-leaf3 { animation: bgLeafFloat3 19s ease-in-out infinite alternate, bgLeafBreath 6s ease-in-out infinite alternate; }
+    .bg-leaf4 { animation: bgLeafFloat4 25s ease-in-out infinite alternate, bgLeafBreath 9s ease-in-out infinite alternate; }
+    .bg-leaf5 { animation: bgLeafFloat5 21s ease-in-out infinite alternate, bgLeafBreath 7.5s ease-in-out infinite alternate; }
+    .bg-leaf6 { animation: bgLeafFloat6 24s ease-in-out infinite alternate, bgLeafBreath 8.5s ease-in-out infinite alternate; }
+    .bg-leaf7 { animation: bgLeafFloat7 27s ease-in-out infinite alternate, bgLeafBreath 6.5s ease-in-out infinite alternate; }
+    .bg-leaf8 { animation: bgLeafFloat8 23s ease-in-out infinite alternate, bgLeafBreath 7.2s ease-in-out infinite alternate; }
+    @keyframes bgLeafBreath {
+      0% { opacity: 0.18; transform: scale(1); }
+      50% { opacity: 0.28; transform: scale(1.08); }
+      100% { opacity: 0.18; transform: scale(1); }
+    }
     @keyframes bgLeafFloat1 { 0% { transform: translateY(0) rotate(-8deg) scale(1); } 100% { transform: translateY(40px) rotate(8deg) scale(1.08); } }
     @keyframes bgLeafFloat2 { 0% { transform: translateY(0) rotate(12deg) scale(1); } 100% { transform: translateY(-60px) rotate(22deg) scale(1.1); } }
     @keyframes bgLeafFloat3 { 0% { transform: translateY(0) rotate(24deg) scale(1); } 100% { transform: translateY(-44px) rotate(14deg) scale(0.95); } }

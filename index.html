@@ -512,9 +512,57 @@
       z-index: 1;
       width: 100%;
     }
+    .mint-leaf-bg {
+      position: fixed;
+      inset: 0;
+      width: 100vw;
+      height: 100vh;
+      pointer-events: none;
+      z-index: 0;
+      overflow: hidden;
+    }
+    .mint-leaf-bg-item {
+      position: absolute;
+      opacity: 0.18;
+      filter: blur(0.5px) drop-shadow(0 2px 8px #2af59844);
+      will-change: transform;
+      transition: opacity 0.5s;
+      pointer-events: none;
+    }
+    .bg-leaf1 { left: 2vw; top: 8vh; width: 180px; animation: bgLeafFloat1 22s ease-in-out infinite alternate; }
+    .bg-leaf2 { right: 4vw; top: 18vh; width: 140px; animation: bgLeafFloat2 28s ease-in-out infinite alternate; }
+    .bg-leaf3 { left: 10vw; top: 38vh; width: 120px; animation: bgLeafFloat3 19s ease-in-out infinite alternate; }
+    .bg-leaf4 { right: 12vw; top: 52vh; width: 160px; animation: bgLeafFloat4 25s ease-in-out infinite alternate; }
+    .bg-leaf5 { left: 18vw; bottom: 8vh; width: 110px; animation: bgLeafFloat5 21s ease-in-out infinite alternate; }
+    .bg-leaf6 { right: 18vw; bottom: 12vh; width: 130px; animation: bgLeafFloat6 24s ease-in-out infinite alternate; }
+    .bg-leaf7 { left: 40vw; top: 18vh; width: 90px; animation: bgLeafFloat7 27s ease-in-out infinite alternate; }
+    .bg-leaf8 { right: 40vw; bottom: 18vh; width: 100px; animation: bgLeafFloat8 23s ease-in-out infinite alternate; }
+    @keyframes bgLeafFloat1 { 0% { transform: translateY(0) rotate(-8deg) scale(1); } 100% { transform: translateY(40px) rotate(8deg) scale(1.08); } }
+    @keyframes bgLeafFloat2 { 0% { transform: translateY(0) rotate(12deg) scale(1); } 100% { transform: translateY(-60px) rotate(22deg) scale(1.1); } }
+    @keyframes bgLeafFloat3 { 0% { transform: translateY(0) rotate(24deg) scale(1); } 100% { transform: translateY(-44px) rotate(14deg) scale(0.95); } }
+    @keyframes bgLeafFloat4 { 0% { transform: translateY(0) rotate(-8deg) scale(1); } 100% { transform: translateY(-36px) rotate(-18deg) scale(1.05); } }
+    @keyframes bgLeafFloat5 { 0% { transform: translateY(0) rotate(8deg) scale(1); } 100% { transform: translateY(32px) rotate(-8deg) scale(1.12); } }
+    @keyframes bgLeafFloat6 { 0% { transform: translateY(0) rotate(-12deg) scale(1); } 100% { transform: translateY(28px) rotate(12deg) scale(1.09); } }
+    @keyframes bgLeafFloat7 { 0% { transform: translateY(0) rotate(18deg) scale(1); } 100% { transform: translateY(-24px) rotate(-12deg) scale(1.04); } }
+    @keyframes bgLeafFloat8 { 0% { transform: translateY(0) rotate(-18deg) scale(1); } 100% { transform: translateY(24px) rotate(18deg) scale(1.07); } }
+    @media (max-width: 700px) {
+      .mint-leaf-bg-item { opacity: 0.06 !important; width: 48px !important; }
+    }
   </style>
 </head>
 <body>
+  <!-- Крупные листья мяты на фоне -->
+  <div class="mint-leaf-bg">
+    <svg class="mint-leaf-bg-item bg-leaf1" viewBox="0 0 128 128" fill="none"><path d="M64 8C88 32 120 72 64 120C8 72 40 32 64 8Z" fill="#2af598" fill-opacity="0.13" stroke="#009e60" stroke-width="3"/><path d="M64 8C72 56 72 104 64 120" stroke="#009e60" stroke-width="3"/></svg>
+    <svg class="mint-leaf-bg-item bg-leaf2" viewBox="0 0 128 128" fill="none"><path d="M64 16C104 40 120 96 64 112C8 96 24 40 64 16Z" fill="#7fffd4" fill-opacity="0.10" stroke="#009e60" stroke-width="3"/><path d="M64 16C72 72 72 104 64 112" stroke="#009e60" stroke-width="3"/></svg>
+    <svg class="mint-leaf-bg-item bg-leaf3" viewBox="0 0 128 128" fill="none"><path d="M64 24C96 56 120 104 64 120C8 104 32 56 64 24Z" fill="#2af598" fill-opacity="0.09" stroke="#009e60" stroke-width="3"/><path d="M64 24C72 80 72 104 64 120" stroke="#009e60" stroke-width="3"/></svg>
+    <svg class="mint-leaf-bg-item bg-leaf4" viewBox="0 0 128 128" fill="none"><path d="M64 12C112 36 124 92 64 124C4 92 16 36 64 12Z" fill="#7fffd4" fill-opacity="0.11" stroke="#009e60" stroke-width="3"/><path d="M64 12C72 68 72 104 64 124" stroke="#009e60" stroke-width="3"/></svg>
+    <svg class="mint-leaf-bg-item bg-leaf5" viewBox="0 0 128 128" fill="none"><path d="M64 8C88 32 120 72 64 120C8 72 40 32 64 8Z" fill="#2af598" fill-opacity="0.08" stroke="#009e60" stroke-width="3"/><path d="M64 8C72 56 72 104 64 120" stroke="#009e60" stroke-width="3"/></svg>
+    <svg class="mint-leaf-bg-item bg-leaf6" viewBox="0 0 128 128" fill="none"><path d="M64 16C104 40 120 96 64 112C8 96 24 40 64 16Z" fill="#7fffd4" fill-opacity="0.07" stroke="#009e60" stroke-width="3"/><path d="M64 16C72 72 72 104 64 112" stroke="#009e60" stroke-width="3"/></svg>
+    <svg class="mint-leaf-bg-item bg-leaf7" viewBox="0 0 128 128" fill="none"><path d="M64 24C96 56 120 104 64 120C8 104 32 56 64 24Z" fill="#2af598" fill-opacity="0.09" stroke="#009e60" stroke-width="3"/><path d="M64 24C72 80 72 104 64 120" stroke="#009e60" stroke-width="3"/></svg>
+    <svg class="mint-leaf-bg-item bg-leaf8" viewBox="0 0 128 128" fill="none"><path d="M64 12C112 36 124 92 64 124C4 92 16 36 64 12Z" fill="#7fffd4" fill-opacity="0.10" stroke="#009e60" stroke-width="3"/><path d="M64 12C72 68 72 104 64 124" stroke="#009e60" stroke-width="3"/></svg>
+  </div>
+
   <!-- Лакшери-хедер с логотипом и бейджем -->
   <div class="header-wrap">
     <div class="mint-leaf-wrap">

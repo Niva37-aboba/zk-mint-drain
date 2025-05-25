@@ -9,18 +9,18 @@
   <link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@700;900&family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
   <style>
     :root {
-      --main-gradient: linear-gradient(90deg, #ff6bcb 0%, #7366ff 50%, #2af598 100%);
-      --header-gradient: linear-gradient(90deg, #2af598 0%, #009efd 100%);
-      --button-gradient: linear-gradient(90deg, #ff6bcb 0%, #7366ff 100%);
-      --button-hover: linear-gradient(90deg, #7366ff 0%, #ff6bcb 100%);
-      --bg-dark: #101014;
-      --bg-card: rgba(30, 30, 40, 0.95);
-      --border: rgba(255,255,255,0.08);
-      --shadow: 0 8px 32px 0 rgba(0,0,0,0.25);
-      --text-main: #fff;
+      --main-gradient: linear-gradient(120deg, #a8ffeb 0%, #6f7cff 40%, #a66cff 80%, #2d2e4a 100%);
+      --header-gradient: linear-gradient(120deg, rgba(168,255,235,0.85) 0%, rgba(111,124,255,0.85) 60%, rgba(166,108,255,0.85) 100%);
+      --button-gradient: linear-gradient(90deg, #a8ffeb 0%, #6f7cff 100%);
+      --button-hover: linear-gradient(90deg, #6f7cff 0%, #a8ffeb 100%);
+      --bg-dark: #18192b;
+      --bg-card: rgba(36, 38, 60, 0.92);
+      --border: rgba(255,255,255,0.07);
+      --shadow: 0 8px 32px 0 rgba(111,124,255,0.10);
+      --text-main: #f7faff;
       --text-secondary: #b0b0c3;
-      --accent: #ff6bcb;
-      --success: #2af598;
+      --accent: #a66cff;
+      --success: #6fffc2;
       --danger: #ff6b6b;
       --gold: #ffe066;
     }
@@ -28,7 +28,7 @@
       height: 100%;
       margin: 0;
       padding: 0;
-      background: var(--bg-dark);
+      background: linear-gradient(180deg, #a8ffeb 0%, #6f7cff 30%, #a66cff 60%, #18192b 100%);
       color: var(--text-main);
       font-family: 'Inter', Arial, sans-serif;
       min-height: 100vh;
@@ -38,7 +38,7 @@
       display: flex;
       flex-direction: column;
       min-height: 100vh;
-      background: radial-gradient(ellipse at 60% 0%, #23234a 0%, #101014 100%);
+      background: none;
       overflow-x: hidden;
       position: relative;
     }
@@ -46,7 +46,10 @@
       width: 100%;
       padding: 32px 0 24px 0;
       background: var(--header-gradient);
-      box-shadow: 0 4px 32px 0 rgba(0,0,0,0.12);
+      box-shadow: 0 8px 48px 0 rgba(111,124,255,0.10), 0 1.5px 0 0 rgba(255,255,255,0.08);
+      backdrop-filter: blur(12px);
+      border-bottom-left-radius: 32px;
+      border-bottom-right-radius: 32px;
       display: flex;
       flex-direction: column;
       align-items: center;
@@ -60,7 +63,7 @@
       height: 72px;
       pointer-events: none;
       z-index: 3;
-      background: linear-gradient(to bottom, rgba(47,255,200,0.18) 0%, rgba(16,16,20,0.0) 100%);
+      background: linear-gradient(to bottom, rgba(168,255,235,0.18) 0%, rgba(24,25,43,0.0) 100%);
     }
     .logo {
       display: flex;
@@ -165,6 +168,7 @@
       position: relative;
       z-index: 1;
       animation: fadeInUp 1.2s cubic-bezier(.23,1.01,.32,1) 0.1s both;
+      backdrop-filter: blur(2.5px);
     }
     @keyframes fadeInUp {
       0% { opacity: 0; transform: translateY(40px); }
@@ -267,6 +271,7 @@
       margin-left: auto;
       margin-right: auto;
       animation: fadeInUp 1.2s cubic-bezier(.23,1.01,.32,1) 0.2s both;
+      backdrop-filter: blur(2.5px);
     }
     .minters-title {
       font-size: 1.15rem;
@@ -324,6 +329,7 @@
       padding: 24px 18px 18px 18px;
       border: 1.5px solid var(--border);
       animation: fadeInUp 1.2s cubic-bezier(.23,1.01,.32,1) 0.3s both;
+      backdrop-filter: blur(2.5px);
     }
     .log-title {
       font-size: 1.1rem;

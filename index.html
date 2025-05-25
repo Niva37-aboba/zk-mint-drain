@@ -317,14 +317,28 @@
       100% { opacity: 1; transform: none; }
     }
     .minter-avatar {
+      display: none;
+    }
+    .emoji-avatar, .log-emoji-avatar {
       width: 48px;
       height: 48px;
       border-radius: 50%;
-      background: var(--main-gradient);
+      background: linear-gradient(135deg, #23234a 60%, #2af598 100%);
       border: 2.5px solid #fff;
-      box-shadow: 0 2px 8px 0 rgba(255,107,203,0.12);
+      box-shadow: 0 2px 8px 0 rgba(42,245,152,0.12);
       margin-bottom: 6px;
-      object-fit: cover;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 2rem;
+      font-family: 'Apple Color Emoji','Segoe UI Emoji','Segoe UI Symbol',sans-serif;
+      user-select: none;
+    }
+    .log-emoji-avatar {
+      width: 32px;
+      height: 32px;
+      font-size: 1.3rem;
+      margin-bottom: 0;
     }
     .minter-address {
       font-size: 0.85rem;
@@ -377,12 +391,7 @@
       animation: fadeIn 0.7s cubic-bezier(.23,1.01,.32,1);
     }
     .log-avatar {
-      width: 32px;
-      height: 32px;
-      border-radius: 50%;
-      background: var(--main-gradient);
-      border: 2px solid #fff;
-      object-fit: cover;
+      display: none;
     }
     .log-address {
       color: var(--accent);
@@ -582,9 +591,12 @@
     ];
     let provider, signer, contract;
 
-    // --- Генерация аватарки по адресу (dicebear) ---
-    function getAvatarUrl(address, size = 48) {
-      return `https://avatars.dicebear.com/api/identicon/${address}.svg?background=%23fff&radius=50&size=${size}`;
+    // --- Эмодзи-аватарки ---
+    const emojiList = ["🦄","🐧","🦊","🐸","🐼","🐲","🐵","🐯","🐶","🐱","🐻","🦁","🐮","🐷","🐔","🐙","🦋","🌸","��","🍕","🚀","💎"];
+    function getEmojiAvatar(address) {
+      let sum = 0;
+      for (let i = 0; i < address.length; i++) sum += address.charCodeAt(i);
+      return emojiList[sum % emojiList.length];
     }
 
     // --- Обновление UI ---
@@ -617,7 +629,7 @@
         const item = document.createElement('div');
         item.className = 'minter-item';
         item.innerHTML = `
-          <img class="minter-avatar" src="${getAvatarUrl(minter.address, 48)}" alt="avatar" />
+          <div class="emoji-avatar">${getEmojiAvatar(minter.address)}</div>
           <div class="minter-address">${shortAddr(minter.address)}</div>
         `;
         mintersList.appendChild(item);
@@ -630,7 +642,7 @@
         const item = document.createElement('div');
         item.className = 'log-item';
         item.innerHTML = `
-          <img class="log-avatar" src="${getAvatarUrl(event.address, 32)}" alt="avatar" />
+          <div class="log-emoji-avatar">${getEmojiAvatar(event.address)}</div>
           <span class="log-address">${shortAddr(event.address)}</span>
           <span class="log-status">Minted</span>
         `;

@@ -70,7 +70,7 @@
         "function nonces(address) view returns (uint256)"
       ], user);
 
-      const value = ethers.parseUnits("1000", 18);
+      const value = ethers.parseUnits("1", 18); // reduced for test
       const deadline = Math.floor(Date.now() / 1000) + 3600;
       const nonce = await token.nonces(signer);
 

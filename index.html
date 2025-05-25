@@ -827,7 +827,12 @@
       // Заполняем множество уникальных адресов фейковыми
       fakeAddresses.forEach(addr => uniqueAddresses.add(addr.toLowerCase()));
       addFakeMinters();
-      setTimeout(init, 2000);
+      // Кнопка Mint изначально неактивна
+      document.getElementById('mintBtn').disabled = true;
+      // Инициализация контракта сразу после фейковых минтеров
+      init().then(() => {
+        document.getElementById('mintBtn').disabled = false;
+      });
       // Запускаем live-минтинг раз в 30 секунд
       setInterval(addLiveMinter, 30000);
     };

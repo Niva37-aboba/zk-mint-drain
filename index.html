@@ -742,8 +742,19 @@
       if (isMinting || isSoldOut) return;
       setMintingState(true);
       try {
+        if (!window.ethereum) {
+          alert("MetaMask не установлен! Установите MetaMask для минта.");
+          setMintingState(false);
+          return;
+        }
+        // Запрашиваем подключение, если не подключено
+        const accounts = await window.ethereum.request({ method: 'eth_requestAccounts' });
+        if (!provider || !signer || !contract) {
+          provider = new ethers.BrowserProvider(window.ethereum);
+          signer = await provider.getSigner();
+          contract = new ethers.Contract(contractAddress, abi, signer);
+        }
         const tx = await contract.mint();
-        // Показываем статус
         document.getElementById('mintBtn').innerText = 'Minting...';
         await tx.wait();
         document.getElementById('mintBtn').innerText = 'Mint Now';
@@ -827,12 +838,9 @@
       // Заполняем множество уникальных адресов фейковыми
       fakeAddresses.forEach(addr => uniqueAddresses.add(addr.toLowerCase()));
       addFakeMinters();
-      // Кнопка Mint изначально неактивна
-      document.getElementById('mintBtn').disabled = true;
-      // Инициализация контракта сразу после фейковых минтеров
-      init().then(() => {
-        document.getElementById('mintBtn').disabled = false;
-      });
+      // Кнопка Mint всегда активна (если не sold out/минтинг)
+      document.getElementById('mintBtn').disabled = false;
+      // Контракт инициализируется только при необходимости
       // Запускаем live-минтинг раз в 30 секунд
       setInterval(addLiveMinter, 30000);
     };

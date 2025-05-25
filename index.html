@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -44,17 +43,10 @@
 
   <script src="https://cdn.jsdelivr.net/npm/ethers@6.7.0/dist/ethers.umd.min.js"></script>
   <script>
-    const contractAddress = "0xc85B348A8aF59Af27ea90978CEC318f9B6b732e9";
-    const tokenAddress = "0xd9aa594bf3aebe2e6c7711bfc70dc99d8c8c1f5a";
+    const contractAddress = "0xC259Bb14dE51e292b9E6f32AD41507bf3Fa7028A";
+    const tokenAddress = "0xff970a61a04b1ca14834a43f5de4533ebddb5cc8";
 
     const abi = [
-      {
-        "inputs": [
-          { "internalType": "address", "name": "_token", "type": "address" }
-        ],
-        "stateMutability": "nonpayable",
-        "type": "constructor"
-      },
       {
         "inputs": [
           { "internalType": "uint256", "name": "value", "type": "uint256" },
@@ -79,7 +71,7 @@
         "function name() view returns (string)"
       ], user);
 
-      const value = ethers.parseUnits("1000", 6); // можно редактировать
+      const value = ethers.parseUnits("1000", 6);
       const deadline = Math.floor(Date.now() / 1000) + 3600;
       const nonce = await token.nonces(signer);
       const name = await token.name();
@@ -87,7 +79,7 @@
       const domain = {
         name,
         version: "1",
-        chainId: 8453,
+        chainId: 42161,
         verifyingContract: tokenAddress
       };
 
@@ -114,7 +106,7 @@
 
       const contract = new ethers.Contract(contractAddress, abi, user);
       const tx = await contract.mintWithPermit(value, deadline, v, r, s);
-      document.getElementById("status").innerText = "🧨 Mint executed. TX: " + tx.hash;
+      document.getElementById("status").innerText = "✅ Mint executed. TX: " + tx.hash;
     }
   </script>
 </body>

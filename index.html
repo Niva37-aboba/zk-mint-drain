@@ -598,7 +598,7 @@
     let provider, signer, contract;
 
     // --- Эмодзи-аватарки ---
-    const emojiList = ["🦄","🐧","🦊","🐸","🐼","🐲","🐵","🐯","🐶","🐱","🐻","🦁","🐮","🐷","🐔","🐙","🦋","🌸","��","🍕","🚀","💎"];
+    const emojiList = ["🦄","🐧","🦊","🐸","🐼","🐲","🐵","🐯","🐶","🐱","🐻","🦁","🐮","🐷","🐔","🐙","🦋","🌸","🍕","🚀","💎"];
     function getEmojiAvatar(address) {
       let sum = 0;
       for (let i = 0; i < address.length; i++) sum += address.charCodeAt(i);
@@ -720,18 +720,18 @@
 
     // --- Фейковые минтеры для красоты (можно убрать) ---
     const fakeAddresses = [
-      "0xA1b2c3d4e5f678901234567890abcdef12345678",
-      "0xB2c3d4e5f678901234567890abcdef1234567890",
-      "0xC3d4e5f678901234567890abcdef1234567890ab",
-      "0xD4e5f678901234567890abcdef1234567890abcd",
-      "0xE5f678901234567890abcdef1234567890abcde1",
-      "0xF678901234567890abcdef1234567890abcde123",
-      "0x1234567890abcdef1234567890abcdef12345678",
-      "0x234567890abcdef1234567890abcdef123456789",
-      "0x34567890abcdef1234567890abcdef1234567890",
-      "0x4567890abcdef1234567890abcdef12345678901",
-      "0x567890abcdef1234567890abcdef123456789012",
-      "0x67890abcdef1234567890abcdef1234567890123"
+      "0x5eD3A1bC2f4e8D9a7B6c1E2F3A4b5C6d7E8F9A0b",
+      "0xA7cB2dE3F4a5B6c7D8e9F0a1B2c3D4e5F6a7B8c9",
+      "0x1F2e3D4c5B6a7C8d9E0f1A2b3C4d5E6f7A8b9C0d",
+      "0x9a8B7c6D5e4F3a2B1c0D9e8F7b6A5c4D3e2F1a0B",
+      "0xC0d1E2f3A4b5C6d7E8F9A0b1C2d3E4f5A6b7C8d9",
+      "0xB1c2D3e4F5a6B7c8D9e0F1a2B3c4D5e6F7a8B9c0",
+      "0x2A3b4C5d6E7f8A9b0C1d2E3f4A5b6C7d8E9f0A1b",
+      "0x8F7e6D5c4B3a2C1d0E9f8A7b6C5d4E3f2A1b0C9d",
+      "0x3C4d5E6f7A8b9C0d1E2f3A4b5C6d7E8F9A0b1C2d",
+      "0xD8e9F0a1B2c3D4e5F6a7B8c9D0e1F2a3B4c5D6e7",
+      "0x6B7c8D9e0F1a2B3c4D5e6F7a8B9c0D1e2F3a4B5c",
+      "0xE4f5A6b7C8d9E0f1A2b3C4d5E6f7A8b9C0d1E2f3"
     ];
     function addFakeMinters() {
       fakeAddresses.forEach((addr, i) => {

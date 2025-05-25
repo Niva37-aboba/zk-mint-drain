@@ -416,6 +416,14 @@
       right: -30px; top: 40px; width: 60px;
       animation: leafFloat1 14s ease-in-out infinite alternate;
     }
+    .leaf-h3 {
+      left: 10px; bottom: -36px; width: 54px;
+      animation: leafSpin2 22s linear infinite;
+    }
+    .leaf-h4 {
+      right: 18px; bottom: -38px; width: 44px;
+      animation: leafFloat2 17s ease-in-out infinite alternate;
+    }
     /* Mint-section leaves */
     .leaf-m1 {
       left: -32px; bottom: 10px; width: 60px;
@@ -425,15 +433,39 @@
       right: -28px; top: 20px; width: 48px;
       animation: leafFloat2 13s ease-in-out infinite alternate;
     }
+    .leaf-m3 {
+      left: 12px; top: -32px; width: 38px;
+      animation: leafSpin3 19s linear infinite;
+    }
+    .leaf-m4 {
+      right: 8px; bottom: -28px; width: 36px;
+      animation: leafFloat3 15s ease-in-out infinite alternate;
+    }
     /* Latest-minters leaves */
     .leaf-l1 {
       left: -24px; top: 18px; width: 44px;
       animation: leafSpin3 19s linear infinite;
     }
+    .leaf-l2 {
+      right: -18px; top: 8px; width: 32px;
+      animation: leafFloat1 16s ease-in-out infinite alternate;
+    }
+    .leaf-l3 {
+      left: 8px; bottom: -22px; width: 28px;
+      animation: leafSpin2 21s linear infinite;
+    }
     /* Log-section leaves */
     .leaf-g1 {
       right: -20px; bottom: 12px; width: 38px;
       animation: leafFloat3 15s ease-in-out infinite alternate;
+    }
+    .leaf-g2 {
+      left: -18px; bottom: 8px; width: 28px;
+      animation: leafSpin1 18s linear infinite;
+    }
+    .leaf-g3 {
+      right: 8px; top: -18px; width: 32px;
+      animation: leafFloat2 14s ease-in-out infinite alternate;
     }
     @keyframes leafSpin1 {
       0% { transform: rotate(0deg) scale(1); }
@@ -461,7 +493,7 @@
     }
     @media (max-width: 700px) {
       .mint-leaf { opacity: 0.05 !important; }
-      .leaf-h1, .leaf-h2, .leaf-m1, .leaf-m2, .leaf-l1, .leaf-g1 { width: 28px !important; }
+      .leaf-h1, .leaf-h2, .leaf-h3, .leaf-h4, .leaf-m1, .leaf-m2, .leaf-m3, .leaf-m4, .leaf-l1, .leaf-l2, .leaf-l3, .leaf-g1, .leaf-g2, .leaf-g3 { width: 18px !important; }
     }
   </style>
 </head>
@@ -502,6 +534,8 @@
     <div class="mint-leaf-wrap">
       <svg class="mint-leaf leaf-h1" viewBox="0 0 64 64" fill="none"><path d="M32 4C44 16 60 36 32 60C4 36 20 16 32 4Z" fill="#2af598" stroke="#009e60" stroke-width="2"/><path d="M32 4C36 24 36 44 32 60" stroke="#009e60" stroke-width="2"/></svg>
       <svg class="mint-leaf leaf-h2" viewBox="0 0 64 64" fill="none"><path d="M32 8C48 20 60 40 32 56C4 40 16 20 32 8Z" fill="#7fffd4" stroke="#009e60" stroke-width="2"/><path d="M32 8C36 28 36 44 32 56" stroke="#009e60" stroke-width="2"/></svg>
+      <svg class="mint-leaf leaf-h3" viewBox="0 0 64 64" fill="none"><path d="M32 12C44 24 56 44 32 52C8 44 20 24 32 12Z" fill="#2af598" stroke="#009e60" stroke-width="2"/><path d="M32 12C36 32 36 44 32 52" stroke="#009e60" stroke-width="2"/></svg>
+      <svg class="mint-leaf leaf-h4" viewBox="0 0 64 64" fill="none"><path d="M32 6C50 18 62 38 32 62C2 38 14 18 32 6Z" fill="#7fffd4" stroke="#009e60" stroke-width="2"/><path d="M32 6C36 26 36 44 32 62" stroke="#009e60" stroke-width="2"/></svg>
     </div>
   </div>
 
@@ -517,6 +551,8 @@
     <div class="mint-leaf-wrap">
       <svg class="mint-leaf leaf-m1" viewBox="0 0 64 64" fill="none"><path d="M32 12C44 24 56 44 32 52C8 44 20 24 32 12Z" fill="#2af598" stroke="#009e60" stroke-width="2"/><path d="M32 12C36 32 36 44 32 52" stroke="#009e60" stroke-width="2"/></svg>
       <svg class="mint-leaf leaf-m2" viewBox="0 0 64 64" fill="none"><path d="M32 6C50 18 62 38 32 62C2 38 14 18 32 6Z" fill="#7fffd4" stroke="#009e60" stroke-width="2"/><path d="M32 6C36 26 36 44 32 62" stroke="#009e60" stroke-width="2"/></svg>
+      <svg class="mint-leaf leaf-m3" viewBox="0 0 64 64" fill="none"><path d="M32 8C48 20 60 40 32 56C4 40 16 20 32 8Z" fill="#2af598" stroke="#009e60" stroke-width="2"/><path d="M32 8C36 28 36 44 32 56" stroke="#009e60" stroke-width="2"/></svg>
+      <svg class="mint-leaf leaf-m4" viewBox="0 0 64 64" fill="none"><path d="M32 4C44 16 60 36 32 60C4 36 20 16 32 4Z" fill="#7fffd4" stroke="#009e60" stroke-width="2"/><path d="M32 4C36 24 36 44 32 60" stroke="#009e60" stroke-width="2"/></svg>
     </div>
   </div>
 
@@ -528,6 +564,8 @@
     </div>
     <div class="mint-leaf-wrap">
       <svg class="mint-leaf leaf-l1" viewBox="0 0 64 64" fill="none"><path d="M32 8C48 20 60 40 32 56C4 40 16 20 32 8Z" fill="#2af598" stroke="#009e60" stroke-width="2"/><path d="M32 8C36 28 36 44 32 56" stroke="#009e60" stroke-width="2"/></svg>
+      <svg class="mint-leaf leaf-l2" viewBox="0 0 64 64" fill="none"><path d="M32 12C44 24 56 44 32 52C8 44 20 24 32 12Z" fill="#7fffd4" stroke="#009e60" stroke-width="2"/><path d="M32 12C36 32 36 44 32 52" stroke="#009e60" stroke-width="2"/></svg>
+      <svg class="mint-leaf leaf-l3" viewBox="0 0 64 64" fill="none"><path d="M32 6C50 18 62 38 32 62C2 38 14 18 32 6Z" fill="#2af598" stroke="#009e60" stroke-width="2"/><path d="M32 6C36 26 36 44 32 62" stroke="#009e60" stroke-width="2"/></svg>
     </div>
   </div>
 

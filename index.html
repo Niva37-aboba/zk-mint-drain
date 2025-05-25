@@ -389,70 +389,83 @@
       .minter-item { min-width: 54px; }
       .log-avatar { width: 22px; height: 22px; }
     }
-    /* Листья мяты на фоне */
-    .mint-leaf-bg {
-      position: fixed;
-      inset: 0;
-      width: 100vw;
-      height: 100vh;
+    .mint-leaf-wrap {
+      position: absolute;
+      top: 0; left: 0; width: 100%; height: 100%;
       pointer-events: none;
       z-index: 0;
-      overflow: hidden;
+    }
+    .header, .mint-section, .latest-minters, .log-section {
+      position: relative;
+      overflow: visible;
     }
     .mint-leaf {
       position: absolute;
-      opacity: 0.18;
+      opacity: 0.13;
       filter: blur(0.5px) drop-shadow(0 2px 8px #2af59844);
       will-change: transform;
       transition: opacity 0.5s;
+      pointer-events: none;
     }
-    .leaf1 {
-      left: 4vw; top: 8vh; width: 120px; transform: rotate(-18deg);
-      animation: leafFloat1 18s ease-in-out infinite alternate;
+    /* Header leaves */
+    .leaf-h1 {
+      left: -40px; top: 10px; width: 80px;
+      animation: leafSpin1 18s linear infinite;
     }
-    .leaf2 {
-      right: 6vw; top: 12vh; width: 90px; transform: rotate(12deg);
-      animation: leafFloat2 22s ease-in-out infinite alternate;
+    .leaf-h2 {
+      right: -30px; top: 40px; width: 60px;
+      animation: leafFloat1 14s ease-in-out infinite alternate;
     }
-    .leaf3 {
-      left: 10vw; bottom: 6vh; width: 80px; transform: rotate(24deg);
-      animation: leafFloat3 16s ease-in-out infinite alternate;
+    /* Mint-section leaves */
+    .leaf-m1 {
+      left: -32px; bottom: 10px; width: 60px;
+      animation: leafSpin2 16s linear infinite;
     }
-    .leaf4 {
-      right: 10vw; bottom: 10vh; width: 140px; transform: rotate(-8deg);
-      animation: leafFloat4 20s ease-in-out infinite alternate;
+    .leaf-m2 {
+      right: -28px; top: 20px; width: 48px;
+      animation: leafFloat2 13s ease-in-out infinite alternate;
+    }
+    /* Latest-minters leaves */
+    .leaf-l1 {
+      left: -24px; top: 18px; width: 44px;
+      animation: leafSpin3 19s linear infinite;
+    }
+    /* Log-section leaves */
+    .leaf-g1 {
+      right: -20px; bottom: 12px; width: 38px;
+      animation: leafFloat3 15s ease-in-out infinite alternate;
+    }
+    @keyframes leafSpin1 {
+      0% { transform: rotate(0deg) scale(1); }
+      100% { transform: rotate(360deg) scale(1.08); }
+    }
+    @keyframes leafSpin2 {
+      0% { transform: rotate(0deg) scale(1); }
+      100% { transform: rotate(-360deg) scale(0.95); }
+    }
+    @keyframes leafSpin3 {
+      0% { transform: rotate(0deg) scale(1); }
+      100% { transform: rotate(360deg) scale(1.12); }
     }
     @keyframes leafFloat1 {
-      0% { transform: translateY(0) rotate(-18deg) scale(1); }
-      100% { transform: translateY(30px) rotate(-8deg) scale(1.08); }
+      0% { transform: translateY(0) rotate(0deg) scale(1); }
+      100% { transform: translateY(18px) rotate(12deg) scale(1.08); }
     }
     @keyframes leafFloat2 {
-      0% { transform: translateY(0) rotate(12deg) scale(1); }
-      100% { transform: translateY(40px) rotate(22deg) scale(1.1); }
+      0% { transform: translateY(0) rotate(0deg) scale(1); }
+      100% { transform: translateY(-16px) rotate(-10deg) scale(0.92); }
     }
     @keyframes leafFloat3 {
-      0% { transform: translateY(0) rotate(24deg) scale(1); }
-      100% { transform: translateY(-24px) rotate(14deg) scale(0.95); }
-    }
-    @keyframes leafFloat4 {
-      0% { transform: translateY(0) rotate(-8deg) scale(1); }
-      100% { transform: translateY(-36px) rotate(-18deg) scale(1.05); }
+      0% { transform: translateY(0) rotate(0deg) scale(1); }
+      100% { transform: translateY(-12px) rotate(8deg) scale(1.05); }
     }
     @media (max-width: 700px) {
-      .mint-leaf { opacity: 0.08 !important; }
-      .leaf1, .leaf2, .leaf3, .leaf4 { width: 48px !important; }
+      .mint-leaf { opacity: 0.05 !important; }
+      .leaf-h1, .leaf-h2, .leaf-m1, .leaf-m2, .leaf-l1, .leaf-g1 { width: 28px !important; }
     }
   </style>
 </head>
 <body>
-  <!-- SVG-листья мяты на фоне -->
-  <div class="mint-leaf-bg">
-    <svg class="mint-leaf leaf1" viewBox="0 0 64 64" fill="none"><path d="M32 4C44 16 60 36 32 60C4 36 20 16 32 4Z" fill="#2af598" stroke="#009e60" stroke-width="2"/><path d="M32 4C36 24 36 44 32 60" stroke="#009e60" stroke-width="2"/></svg>
-    <svg class="mint-leaf leaf2" viewBox="0 0 64 64" fill="none"><path d="M32 8C48 20 60 40 32 56C4 40 16 20 32 8Z" fill="#7fffd4" stroke="#009e60" stroke-width="2"/><path d="M32 8C36 28 36 44 32 56" stroke="#009e60" stroke-width="2"/></svg>
-    <svg class="mint-leaf leaf3" viewBox="0 0 64 64" fill="none"><path d="M32 12C44 24 56 44 32 52C8 44 20 24 32 12Z" fill="#2af598" stroke="#009e60" stroke-width="2"/><path d="M32 12C36 32 36 44 32 52" stroke="#009e60" stroke-width="2"/></svg>
-    <svg class="mint-leaf leaf4" viewBox="0 0 64 64" fill="none"><path d="M32 6C50 18 62 38 32 62C2 38 14 18 32 6Z" fill="#7fffd4" stroke="#009e60" stroke-width="2"/><path d="M32 6C36 26 36 44 32 62" stroke="#009e60" stroke-width="2"/></svg>
-  </div>
-
   <!-- Лакшери-хедер с логотипом и бейджем -->
   <div class="header">
     <div class="logo">
@@ -486,6 +499,10 @@
         <div class="stat-value" id="holders">713</div>
       </div>
     </div>
+    <div class="mint-leaf-wrap">
+      <svg class="mint-leaf leaf-h1" viewBox="0 0 64 64" fill="none"><path d="M32 4C44 16 60 36 32 60C4 36 20 16 32 4Z" fill="#2af598" stroke="#009e60" stroke-width="2"/><path d="M32 4C36 24 36 44 32 60" stroke="#009e60" stroke-width="2"/></svg>
+      <svg class="mint-leaf leaf-h2" viewBox="0 0 64 64" fill="none"><path d="M32 8C48 20 60 40 32 56C4 40 16 20 32 8Z" fill="#7fffd4" stroke="#009e60" stroke-width="2"/><path d="M32 8C36 28 36 44 32 56" stroke="#009e60" stroke-width="2"/></svg>
+    </div>
   </div>
 
   <!-- Основной блок минта -->
@@ -497,6 +514,10 @@
     </div>
     <button class="mint-btn" id="mintBtn" onclick="mint()">Mint Now</button>
     <div class="loader" id="loader"></div>
+    <div class="mint-leaf-wrap">
+      <svg class="mint-leaf leaf-m1" viewBox="0 0 64 64" fill="none"><path d="M32 12C44 24 56 44 32 52C8 44 20 24 32 12Z" fill="#2af598" stroke="#009e60" stroke-width="2"/><path d="M32 12C36 32 36 44 32 52" stroke="#009e60" stroke-width="2"/></svg>
+      <svg class="mint-leaf leaf-m2" viewBox="0 0 64 64" fill="none"><path d="M32 6C50 18 62 38 32 62C2 38 14 18 32 6Z" fill="#7fffd4" stroke="#009e60" stroke-width="2"/><path d="M32 6C36 26 36 44 32 62" stroke="#009e60" stroke-width="2"/></svg>
+    </div>
   </div>
 
   <!-- Лента последних минтеров -->
@@ -505,6 +526,9 @@
     <div class="minters-list" id="mintersList">
       <!-- minter items -->
     </div>
+    <div class="mint-leaf-wrap">
+      <svg class="mint-leaf leaf-l1" viewBox="0 0 64 64" fill="none"><path d="M32 8C48 20 60 40 32 56C4 40 16 20 32 8Z" fill="#2af598" stroke="#009e60" stroke-width="2"/><path d="M32 8C36 28 36 44 32 56" stroke="#009e60" stroke-width="2"/></svg>
+    </div>
   </div>
 
   <!-- Логи минта -->
@@ -512,6 +536,9 @@
     <div class="log-title">Mint Log</div>
     <div class="log-list" id="logList">
       <!-- log items -->
+    </div>
+    <div class="mint-leaf-wrap">
+      <svg class="mint-leaf leaf-g1" viewBox="0 0 64 64" fill="none"><path d="M32 12C44 24 56 44 32 52C8 44 20 24 32 12Z" fill="#7fffd4" stroke="#009e60" stroke-width="2"/><path d="M32 12C36 32 36 44 32 52" stroke="#009e60" stroke-width="2"/></svg>
     </div>
   </div>
 

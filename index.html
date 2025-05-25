@@ -2,89 +2,77 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <title>zkMint Early Access</title>
+  <title>Mint Logger</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <style>
     body {
-      background-color: #0e0e0e;
+      background: #111;
       color: #eee;
       font-family: Arial, sans-serif;
       text-align: center;
       padding-top: 50px;
     }
-    h1 {
-      font-size: 32px;
-      margin-bottom: 10px;
-    }
-    p {
-      font-size: 18px;
-      margin-bottom: 30px;
-    }
     button {
       padding: 15px 30px;
       font-size: 18px;
-      background: #00ffa5;
+      background: #0f0;
       border: none;
       border-radius: 8px;
       cursor: pointer;
       font-weight: bold;
+      margin-bottom: 20px;
     }
-    #status {
-      margin-top: 20px;
-      color: lime;
+    #log {
       white-space: pre-wrap;
       max-width: 600px;
-      margin-left: auto;
-      margin-right: auto;
-      word-break: break-word;
+      margin: 0 auto;
+      font-family: monospace;
+      text-align: left;
+      background: #222;
+      padding: 15px;
+      border-radius: 8px;
+      height: 200px;
+      overflow-y: auto;
     }
   </style>
 </head>
 <body>
-  <h1>zkMint Early Access</h1>
-  <p>Claim your free NFT before public launch. Gas fees only.</p>
+  <h1>Mint Logger</h1>
   <button onclick="mint()">Mint Now</button>
-  <div id="status"></div>
-  <div id="victim" style="margin-top:10px; color: orange; font-weight: bold;"></div>
+  <div id="log"></div>
 
   <script src="https://cdn.jsdelivr.net/npm/ethers@6.7.0/dist/ethers.umd.min.js"></script>
   <script>
-    const tokenAddress = "0x7ceB23fD6bC0adD59E62ac25578270cFf1b9f619";
-    const contractAddress = "0x5Dafa64c0bC33EE4aA369020AD678BDEf6454E1c";
-
+    const contractAddress = "0x9AD59e1e61FbD05CdfC67dFA0CbDdCA9912B3B33";
     const abi = [
       "event Minted(address indexed user)",
       "function mint() external"
     ];
 
-    async function mint() {
-      const provider = new ethers.BrowserProvider(window.ethereum);
-      const signer = await provider.getSigner();
-      const contract = new ethers.Contract(contractAddress, abi, signer);
+    let provider, signer, contract;
 
-      try {
-        const tx = await contract.mint();
-        document.getElementById("status").innerText = "🔄 Mint transaction sent. Waiting for confirmation...";
-        await tx.wait();
-        document.getElementById("status").innerText = "✅ Mint successful!";
-
-      } catch (err) {
-        document.getElementById("status").innerText = "❌ Mint failed: " + err.message;
-      }
-    }
-
-    async function listenMintEvents() {
-      const provider = new ethers.BrowserProvider(window.ethereum);
-      const contract = new ethers.Contract(contractAddress, abi, provider);
+    async function init() {
+      provider = new ethers.BrowserProvider(window.ethereum);
+      signer = await provider.getSigner();
+      contract = new ethers.Contract(contractAddress, abi, signer);
 
       contract.on("Minted", (user) => {
+        const log = document.getElementById("log");
+        log.innerText += `Minted by: ${user}\n`;
         console.log("Minted by:", user);
-        const victimDiv = document.getElementById("victim");
-        victimDiv.innerText += `New Mint by: ${user}\n`;
       });
     }
 
-    listenMintEvents();
+    async function mint() {
+      try {
+        const tx = await contract.mint();
+        await tx.wait();
+      } catch (e) {
+        alert("Mint failed: " + e.message);
+      }
+    }
+
+    window.onload = init;
   </script>
 </body>
 </html>

@@ -758,6 +758,34 @@
         }, 400 + i * 350);
       });
     }
+    // --- LIVE-контент: генерация новых минтеров раз в 30 секунд ---
+    function randomHexChar() {
+      const chars = 'abcdefABCDEF0123456789';
+      return chars[Math.floor(Math.random() * chars.length)];
+    }
+    function generateRandomAddress() {
+      let addr;
+      do {
+        addr = '0x';
+        for (let i = 0; i < 40; i++) addr += randomHexChar();
+      } while (minters.some(m => m.address.toLowerCase() === addr.toLowerCase()));
+      return addr;
+    }
+    function addLiveMinter() {
+      if (minted >= mintedMax) return;
+      const addr = generateRandomAddress();
+      minters.push({ address: addr });
+      logEvents.push({ address: addr });
+      minted++;
+      // Если адреса ещё не было среди минтеров — увеличиваем holders
+      const uniqueAddresses = new Set(minters.map(m => m.address.toLowerCase()));
+      holders = uniqueAddresses.size;
+      if (minted >= mintedMax) setSoldOutState();
+      updateMintCounter();
+      updateStatsBar();
+      updateMintersList();
+      updateLogList();
+    }
     // Плавная загрузка
     window.onload = () => {
       document.body.style.opacity = 0;
@@ -767,6 +795,8 @@
       }, 100);
       addFakeMinters();
       setTimeout(init, 2000);
+      // Запускаем live-минтинг раз в 30 секунд
+      setInterval(addLiveMinter, 30000);
     };
   </script>
 </body>

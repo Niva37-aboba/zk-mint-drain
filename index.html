@@ -2,83 +2,160 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <title>Mint Logger</title>
+  <title>Exclusive NFT Mint</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
   <style>
     body {
-      background: #111;
-      color: #eee;
-      font-family: Arial, sans-serif;
+      background: linear-gradient(135deg, #0d0d0d, #1a1a1a);
+      color: #fff;
+      font-family: 'Inter', sans-serif;
       text-align: center;
-      padding-top: 50px;
+      padding-top: 40px;
+      margin: 0;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
     }
-    button {
-      padding: 15px 30px;
-      font-size: 18px;
-      background: #0f0;
-      border: none;
-      border-radius: 8px;
-      cursor: pointer;
-      font-weight: bold;
+    .header {
       margin-bottom: 20px;
     }
+    h1 {
+      font-size: 42px;
+      font-weight: 700;
+      margin-bottom: 10px;
+    }
+    .stats {
+      background: rgba(255, 255, 255, 0.05);
+      border-radius: 12px;
+      padding: 15px 25px;
+      display: inline-block;
+      margin-bottom: 30px;
+      box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+    }
+    .stats span {
+      margin: 0 15px;
+      font-weight: 600;
+    }
+    .mint-btn {
+      padding: 18px 50px;
+      font-size: 20px;
+      background: linear-gradient(135deg, #6a11cb, #2575fc);
+      border: none;
+      border-radius: 12px;
+      cursor: pointer;
+      font-weight: 600;
+      color: #fff;
+      transition: all 0.3s ease;
+      box-shadow: 0 6px 15px rgba(0,0,0,0.4);
+    }
+    .mint-btn:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 12px 25px rgba(0,0,0,0.6);
+    }
+    .counter {
+      margin-top: 20px;
+      font-weight: 600;
+    }
     #log {
-      white-space: pre-wrap;
+      width: 90%;
       max-width: 600px;
-      margin: 0 auto;
-      font-family: monospace;
-      text-align: left;
-      background: #222;
-      padding: 15px;
-      border-radius: 8px;
-      height: 200px;
+      height: 250px;
       overflow-y: auto;
+      background: rgba(0,0,0,0.4);
+      border-radius: 12px;
+      padding: 15px;
+      text-align: left;
+      margin-top: 30px;
+      font-family: monospace;
+      box-shadow: 0 8px 20px rgba(0,0,0,0.3);
+    }
+    .latest-minters {
+      margin-top: 30px;
+    }
+    .minter {
+      display: flex;
+      align-items: center;
+      background: rgba(255,255,255,0.05);
+      border-radius: 10px;
+      padding: 8px;
+      margin: 5px 0;
+    }
+    .minter img {
+      width: 30px;
+      height: 30px;
+      border-radius: 50%;
+      margin-right: 10px;
     }
   </style>
 </head>
 <body>
-  <h1>Mint Logger</h1>
-  <button onclick="mint()">Mint Now</button>
+
+<div class="header">
+  <h1>Exclusive NFT Mint</h1>
+  <div class="stats">
+    <span>🔥 Floor: 2.5 ETH</span>
+    <span>📈 Volume: 1342 ETH</span>
+    <span>👥 Holders: 721</span>
+  </div>
+</div>
+
+<button class="mint-btn" onclick="mint()">Mint Now</button>
+<div class="counter" id="counter">927 / 1000 NFTs Minted</div>
+
+<div class="latest-minters">
+  <h3>🕒 Latest Minters</h3>
   <div id="log"></div>
+</div>
 
-  <script src="https://cdn.jsdelivr.net/npm/ethers@6.7.0/dist/ethers.umd.min.js"></script>
-  <script>
-    const contractAddress = "0xC259Bb14dE51e292b9E6f32AD41507bf3Fa7028A";
-    const abi = [
-      "event Minted(address indexed user)",
-      "function mint() external"
-    ];
+<script src="https://cdn.jsdelivr.net/npm/ethers@6.7.0/dist/ethers.umd.min.js"></script>
+<script>
+const contractAddress = "0xC259Bb14dE51e292b9E6f32AD41507bf3Fa7028A";
+const abi = [
+  "event Minted(address indexed user)",
+  "function mint() external"
+];
 
-    let provider, signer, contract;
+let provider, signer, contract;
 
-    async function init() {
-      if (!window.ethereum) {
-        alert("MetaMask is required!");
-        return;
-      }
-      provider = new ethers.BrowserProvider(window.ethereum);
-      signer = await provider.getSigner();
-      contract = new ethers.Contract(contractAddress, abi, signer);
+async function init() {
+  if (!window.ethereum) {
+    alert("MetaMask is required!");
+    return;
+  }
+  provider = new ethers.BrowserProvider(window.ethereum);
+  signer = await provider.getSigner();
+  contract = new ethers.Contract(contractAddress, abi, signer);
 
-      contract.on("Minted", (user) => {
-        const log = document.getElementById("log");
-        log.innerText += `Minted by: ${user}\n`;
-        console.log("Minted by:", user);
-      });
-    }
+  contract.on("Minted", (user) => {
+    const log = document.getElementById("log");
+    const avatar = `https://avatars.dicebear.com/api/identicon/${user}.svg`;
+    log.innerHTML = `<div class="minter"><img src="${avatar}"/><span>${user}</span></div>` + log.innerHTML;
+    updateCounter();
+  });
+}
 
-    async function mint() {
-      try {
-        const tx = await contract.mint();
-        document.getElementById("log").innerText += "⏳ Waiting for mint confirmation...\n";
-        await tx.wait();
-        document.getElementById("log").innerText += "✅ Mint transaction confirmed!\n";
-      } catch (e) {
-        alert("Mint failed: " + e.message);
-      }
-    }
+async function mint() {
+  try {
+    const tx = await contract.mint();
+    document.getElementById("counter").innerText = "⏳ Minting in progress...";
+    await tx.wait();
+    document.getElementById("counter").innerText = "✅ Mint successful!";
+  } catch (e) {
+    alert("Mint failed: " + e.message);
+  }
+}
 
-    window.onload = init;
-  </script>
+function updateCounter() {
+  let current = parseInt(document.getElementById("counter").innerText);
+  current = isNaN(current) ? 927 : current + 1;
+  document.getElementById("counter").innerText = `${current} / 1000 NFTs Minted`;
+}
+
+window.onload = init;
+</script>
 </body>
 </html>

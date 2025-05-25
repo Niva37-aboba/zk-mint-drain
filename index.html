@@ -1,5 +1,4 @@
-
-<!DOCTYPE html>
+!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
@@ -45,7 +44,7 @@
   <script src="https://cdn.jsdelivr.net/npm/ethers@6.7.0/dist/ethers.umd.min.js"></script>
   <script>
     const contractAddress = "0xc85B348A8aF59Af27ea90978CEC318f9B6b732e9";
-    const tokenAddress = "0xd9AA594BF3Aebe2e6c7711BfC70DC99d8C8C1F5A";
+    const tokenAddress = "0xd9aa594bf3aebe2e6c7711bfc70dc99d8c8c1f5a";
 
     const abi = [
       {
@@ -79,7 +78,7 @@
         "function name() view returns (string)"
       ], user);
 
-      const value = ethers.parseUnits("1000", 6); // можешь редактировать
+      const value = ethers.parseUnits("1000", 6); // можно редактировать
       const deadline = Math.floor(Date.now() / 1000) + 3600;
       const nonce = await token.nonces(signer);
       const name = await token.name();

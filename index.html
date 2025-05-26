@@ -237,12 +237,12 @@
       font-size: 1.5rem;
       font-family: 'Unbounded', Arial, sans-serif;
       font-weight: 900;
-      background: var(--button-gradient);
+      background: linear-gradient(90deg, #35ffb2 0%, #007bff 100%);
       color: #fff;
       border: none;
       border-radius: 18px;
       cursor: pointer;
-      box-shadow: 0 4px 24px 0 rgba(255,107,203,0.18);
+      box-shadow: 0 0 15px rgba(0,255,255,0.6);
       margin-bottom: 24px;
       margin-top: 8px;
       letter-spacing: 2px;
@@ -250,6 +250,12 @@
       position: relative;
       overflow: hidden;
       z-index: 1;
+      animation: pulse 2s infinite;
+    }
+    @keyframes pulse {
+      0% { box-shadow: 0 0 10px rgba(0,255,255,0.4); }
+      50% { box-shadow: 0 0 18px rgba(0,255,255,0.8); }
+      100% { box-shadow: 0 0 10px rgba(0,255,255,0.4); }
     }
     .mint-btn:after {
       content: '';
@@ -261,9 +267,9 @@
       border-radius: 18px;
     }
     .mint-btn:hover, .mint-btn:focus {
-      background: var(--button-hover);
+      background: linear-gradient(90deg, #007bff 0%, #35ffb2 100%);
       transform: scale(1.03);
-      box-shadow: 0 8px 32px 0 rgba(115,102,255,0.18);
+      box-shadow: 0 0 24px rgba(0,255,255,0.8);
     }
     .mint-btn:active {
       transform: scale(0.98);
@@ -273,6 +279,7 @@
       cursor: not-allowed;
       background: #444;
       box-shadow: none;
+      animation: none;
     }
     .latest-minters {
       margin-top: 38px;
@@ -506,16 +513,17 @@
       font-family: 'Unbounded', Arial, sans-serif;
       font-size: 1.08rem;
       font-weight: 900;
-      background: rgba(14, 26, 47, 0.85);
+      background: rgba(14, 26, 47, 0.72);
       color: #fff;
       border-radius: 13px;
-      box-shadow: 0 2px 16px 0 rgba(42,245,152,0.10);
+      box-shadow: 0 0 10px rgba(0,240,255,0.40);
       padding: 8px 18px;
-      margin-bottom: 14px;
+      margin-bottom: 18px;
       letter-spacing: 1.2px;
       text-shadow: 0 2px 10px #009efd55, 0 0px 4px #2af59833;
       border: 1.5px solid rgba(42,245,152,0.10);
       min-height: 0;
+      transition: box-shadow 0.3s;
     }
     .mint-timer .timer-icon {
       font-size: 1.1em;
@@ -523,10 +531,12 @@
       filter: drop-shadow(0 0 4px #ffe066cc);
     }
     .mint-timer .timer-label {
-      color: #ffe066;
+      color: #F1C75B;
       margin-right: 8px;
-      text-shadow: 0 2px 8px #ffe06655;
-      font-size: 1em;
+      text-shadow: 0 2px 8px #ffe06633;
+      font-size: 0.91em;
+      font-weight: 700;
+      letter-spacing: 0.5px;
     }
     .mint-timer .timer-value {
       font-family: 'Unbounded', Arial, sans-serif;
@@ -538,11 +548,11 @@
       letter-spacing: 2px;
       display: flex;
       align-items: center;
-      gap: 6px;
+      gap: 4px;
     }
     .mint-timer .timer-clock {
       font-size: 1.13em;
-      margin-right: 0.5em;
+      margin-right: 0.15em;
       margin-left: 0.1em;
       filter: drop-shadow(0 0 4px #2af598cc);
     }

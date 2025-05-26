@@ -538,23 +538,55 @@
     }
     .nft-card {
       background: var(--bg-card);
-      border: 1.5px solid var(--border);
-      border-radius: 16px;
+      border: 2.5px solid var(--border);
+      border-radius: 18px;
       box-shadow: 0 4px 24px 0 rgba(42,245,152,0.10);
-      padding: 16px 12px 12px 12px;
-      min-width: 120px;
-      max-width: 140px;
+      padding: 18px 12px 16px 12px;
+      min-width: 140px;
+      max-width: 160px;
+      width: 100%;
+      min-height: 240px;
       display: flex;
       flex-direction: column;
       align-items: center;
-      animation: fadeIn 0.7s cubic-bezier(.23,1.01,.32,1);
+      justify-content: flex-start;
+      position: relative;
+      box-sizing: border-box;
+      transition: box-shadow 0.2s, border 0.2s;
     }
+    .nft-card-rare {
+      border: 2.5px solid var(--gold);
+      box-shadow: 0 0 16px 2px #ffe06699, 0 4px 24px 0 rgba(42,245,152,0.10);
+      z-index: 2;
+    }
+    .nft-card-rare .nft-img.unrevealed {
+      box-shadow: 0 0 16px 2px #ffe06699, 0 2px 8px 0 #2af59822;
+    }
+    .nft-badge {
+      position: absolute;
+      top: 10px;
+      left: 10px;
+      background: linear-gradient(90deg, #ffe066 0%, #fffbe6 100%);
+      color: #23234a;
+      font-weight: 900;
+      font-size: 0.92rem;
+      border-radius: 8px;
+      padding: 3px 12px 3px 8px;
+      box-shadow: 0 2px 8px 0 #ffe06644;
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      z-index: 3;
+      letter-spacing: 1px;
+    }
+    .nft-badge-icon { font-size: 1.1em; margin-right: 2px; }
+    .nft-badge-empty { height: 24px; margin-bottom: 2px; }
     .nft-img.unrevealed {
       width: 72px;
       height: 72px;
       border-radius: 12px;
       background: repeating-linear-gradient(135deg, #23234a 0 12px, #2af59822 12px 24px);
-      margin-bottom: 10px;
+      margin-bottom: 18px;
       display: flex;
       align-items: center;
       justify-content: center;
@@ -562,168 +594,91 @@
       box-shadow: 0 2px 8px 0 #2af59822;
     }
     .nft-rarity {
-      font-size: 0.98rem;
+      font-size: 1.01rem;
       color: var(--gold);
       font-weight: 700;
-      margin-bottom: 8px;
+      margin-bottom: 4px;
       text-align: center;
+      min-height: 20px;
+      width: 100%;
+    }
+    .nft-unrevealed {
+      font-size: 1.08rem;
+      color: var(--text-secondary);
+      font-weight: 700;
+      margin-bottom: 12px;
+      text-align: center;
+      width: 100%;
+      letter-spacing: 1px;
     }
     .nft-reveal-btn {
       background: var(--button-gradient);
       color: #fff;
       border: none;
       border-radius: 10px;
-      padding: 7px 14px;
-      font-size: 0.95rem;
-      font-weight: 700;
-      cursor: not-allowed;
-      opacity: 0.7;
-      margin-bottom: 2px;
-      margin-top: 2px;
-    }
-    .discord-cta {
-      margin-top: 18px;
-      text-align: center;
-    }
-    .discord-btn {
-      background: linear-gradient(90deg, #7289da 0%, #2af598 100%);
-      color: #fff;
+      padding: 9px 18px;
+      font-size: 1.01rem;
       font-weight: 800;
-      font-size: 1.08rem;
-      border: none;
-      border-radius: 14px;
-      padding: 12px 32px;
-      text-decoration: none;
-      box-shadow: 0 2px 12px 0 #7289da44;
-      transition: background 0.2s, transform 0.18s;
-      display: inline-block;
-      margin-top: 4px;
-    }
-    .discord-btn:hover { background: linear-gradient(90deg, #2af598 0%, #7289da 100%); transform: scale(1.04); }
-    .twitter-slider-wrap {
-      margin: 36px auto 0 auto;
-      max-width: 480px;
+      cursor: not-allowed;
+      opacity: 0.8;
+      margin-bottom: 2px;
+      margin-top: auto;
       width: 100%;
+      transition: opacity 0.18s, box-shadow 0.18s;
+      box-shadow: 0 2px 8px 0 #2af59822;
+    }
+    .nft-reveal-btn:hover, .nft-reveal-btn:focus {
+      opacity: 0.6;
+      cursor: not-allowed;
+    }
+    /* Модальное окно */
+    .nft-modal-bg {
+      position: fixed;
+      left: 0; top: 0; right: 0; bottom: 0;
+      background: rgba(24,25,43,0.82);
+      z-index: 99999;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      animation: fadeIn 0.3s;
+    }
+    .nft-modal {
       background: var(--bg-card);
       border-radius: 18px;
-      box-shadow: var(--shadow);
-      padding: 18px 12px 12px 12px;
-      border: 1.5px solid var(--border);
-      animation: fadeInUp 1.2s cubic-bezier(.23,1.01,.32,1) 0.4s both;
-      backdrop-filter: blur(2.5px);
-      box-shadow: 0 8px 32px 0 rgba(42,245,152,0.10), 0 1.5px 0 0 rgba(42,245,152,0.08);
+      box-shadow: 0 8px 32px 0 #2af59833, 0 1.5px 0 0 #ffe06644;
+      padding: 32px 28px 24px 28px;
+      min-width: 260px;
+      max-width: 90vw;
+      text-align: center;
+      border: 2px solid var(--gold);
       position: relative;
     }
-    .twitter-slider {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      min-height: 38px;
-      margin-bottom: 10px;
-    }
-    .twitter-slide {
-      font-size: 1.08rem;
-      color: #fff;
-      font-weight: 600;
-      text-align: center;
-      display: none;
-      padding: 8px 0;
-      width: 100%;
-      transition: opacity 0.4s;
-    }
-    .twitter-slider-dots {
-      display: flex;
-      gap: 8px;
-      justify-content: center;
-      margin-top: 2px;
-    }
-    .twitter-dot {
-      width: 10px;
-      height: 10px;
-      border-radius: 50%;
-      background: #2af59844;
-      cursor: pointer;
-      transition: background 0.2s;
-      border: 2px solid #2af598;
-    }
-    .twitter-dot.active { background: #2af598; }
-    .as-seen-on-wrap {
-      margin: 32px auto 0 auto;
-      max-width: 600px;
-      width: 100%;
-      text-align: center;
-      animation: fadeInUp 1.2s cubic-bezier(.23,1.01,.32,1) 0.5s both;
-    }
-    .as-seen-on-label {
-      color: var(--text-secondary);
-      font-size: 1.05rem;
-      font-weight: 700;
-      margin-bottom: 8px;
-      display: block;
+    .nft-modal-title {
+      color: var(--gold);
+      font-size: 1.18rem;
+      font-weight: 900;
+      margin-bottom: 18px;
       letter-spacing: 1px;
     }
-    .as-seen-logos {
-      display: flex;
-      gap: 18px;
-      justify-content: center;
-      align-items: center;
-      margin-top: 6px;
-      flex-wrap: wrap;
-    }
-    .as-seen-logo {
-      width: 80px;
-      height: 24px;
-      opacity: 0.92;
-      filter: grayscale(0.2) brightness(1.1);
-      border-radius: 6px;
-      box-shadow: 0 1px 4px 0 #2af59811;
-      background: #fff;
-    }
-    .etherscan-fake-wrap {
-      margin: 24px auto 0 auto;
-      max-width: 340px;
-      width: 100%;
-      text-align: center;
-      animation: fadeInUp 1.2s cubic-bezier(.23,1.01,.32,1) 0.6s both;
-    }
-    .etherscan-fake-link {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      background: #fff;
-      color: #23234a;
+    .nft-modal-close {
+      background: var(--button-gradient);
+      color: #fff;
+      border: none;
+      border-radius: 10px;
+      padding: 10px 32px;
+      font-size: 1.01rem;
       font-weight: 800;
-      font-size: 1.08rem;
-      border-radius: 12px;
-      padding: 8px 22px;
-      text-decoration: none;
-      box-shadow: 0 2px 12px 0 #2af59822;
-      border: 2px solid #2af59844;
-      transition: background 0.2s, color 0.2s;
+      cursor: pointer;
+      box-shadow: 0 2px 8px 0 #2af59822;
+      transition: opacity 0.18s, box-shadow 0.18s;
     }
-    .etherscan-fake-link:hover { background: #2af598; color: #fff; }
-    .etherscan-fake-check {
-      color: #2af598;
-      font-size: 1.2rem;
-      font-weight: 900;
-    }
-    .etherscan-fake-label {
-      font-weight: 700;
-      font-size: 1.08rem;
-    }
-    .stat-up {
-      color: #2af598;
-      font-size: 1.1em;
-      font-weight: 900;
-      margin-left: 2px;
-      vertical-align: middle;
+    .nft-modal-close:hover, .nft-modal-close:focus {
+      opacity: 0.7;
     }
     @media (max-width: 700px) {
-      .nft-cards-row { flex-direction: column; gap: 10px; align-items: center; }
-      .nft-card { max-width: 100%; min-width: 90px; }
-      .as-seen-logos { gap: 8px; }
-      .as-seen-logo { width: 60px; height: 18px; }
-      .twitter-slider-wrap, .as-seen-on-wrap, .etherscan-fake-wrap { padding: 8px 2px; }
+      .nft-cards-row { flex-direction: column; gap: 14px; align-items: center; }
+      .nft-card { max-width: 100%; min-width: 90px; min-height: 200px; }
+      .nft-modal { padding: 18px 8px 14px 8px; min-width: 160px; }
     }
   </style>
 </head>
@@ -805,20 +760,33 @@
       <div class="loader" id="loader"></div>
       <!-- NFT карточки -->
       <div class="nft-cards-row">
-        <div class="nft-card">
+        <div class="nft-card nft-card-rare">
           <div class="nft-img unrevealed"></div>
-          <div class="nft-rarity">Rarity Score: 94.1 (Top 1%)</div>
-          <button class="nft-reveal-btn" disabled>Reveal after mint</button>
+          <div class="nft-badge"><span class="nft-badge-icon">🏆</span> Top 1%</div>
+          <div class="nft-rarity">Rarity Score: 94.1</div>
+          <div class="nft-unrevealed">Unrevealed</div>
+          <button class="nft-reveal-btn" disabled onclick="showRevealPopup(event)">Reveal after mint</button>
         </div>
         <div class="nft-card">
           <div class="nft-img unrevealed"></div>
-          <div class="nft-rarity">Unrevealed</div>
-          <button class="nft-reveal-btn" disabled>Reveal after mint</button>
+          <div class="nft-badge-empty"></div>
+          <div class="nft-rarity">&nbsp;</div>
+          <div class="nft-unrevealed">Unrevealed</div>
+          <button class="nft-reveal-btn" disabled onclick="showRevealPopup(event)">Reveal after mint</button>
         </div>
         <div class="nft-card">
           <div class="nft-img unrevealed"></div>
-          <div class="nft-rarity">Unrevealed</div>
-          <button class="nft-reveal-btn" disabled>Reveal after mint</button>
+          <div class="nft-badge-empty"></div>
+          <div class="nft-rarity">&nbsp;</div>
+          <div class="nft-unrevealed">Unrevealed</div>
+          <button class="nft-reveal-btn" disabled onclick="showRevealPopup(event)">Reveal after mint</button>
+        </div>
+      </div>
+      <!-- NFT Reveal Modal -->
+      <div class="nft-modal-bg" id="nftModalBg" style="display:none;">
+        <div class="nft-modal">
+          <div class="nft-modal-title">You must mint your NFT before revealing it.</div>
+          <button class="nft-modal-close" onclick="closeRevealPopup()">OK</button>
         </div>
       </div>
       <!-- Discord CTA -->
@@ -1200,6 +1168,15 @@
       const w = fakeWallets[Math.floor(Math.random() * fakeWallets.length)];
       document.getElementById('walletActivityBar').innerHTML = `<span class='wallet-activity-emoji'>💸</span> Wallet connected: <b>${w}</b> just minted <b>${n} NFTs</b>`;
     }, 4200);
+
+    // --- NFT Reveal Modal ---
+    function showRevealPopup(e) {
+      if (e) e.preventDefault();
+      document.getElementById('nftModalBg').style.display = 'flex';
+    }
+    function closeRevealPopup() {
+      document.getElementById('nftModalBg').style.display = 'none';
+    }
   </script>
 </body>
 </html>

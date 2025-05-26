@@ -957,6 +957,85 @@
         display: none;
       }
     }
+    .as-seen-on-pro {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      margin: 36px auto 0 auto;
+      width: 100%;
+      max-width: 700px;
+      padding-bottom: 18px;
+    }
+    .section-label {
+      font-family: 'Inter', Arial, sans-serif;
+      font-size: 13px;
+      color: #999;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      margin-bottom: 10px;
+      text-align: center;
+      opacity: 0.85;
+    }
+    .as-seen-logos {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      align-items: flex-end;
+      gap: 32px;
+      width: 100%;
+    }
+    .as-seen-logo-item {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      min-width: 60px;
+      max-width: 100px;
+      margin-bottom: 0;
+    }
+    .as-seen-logo {
+      display: block;
+      margin: 0 auto;
+      opacity: 0.7;
+      transition: opacity 0.3s, transform 0.3s, filter 0.3s;
+      filter: drop-shadow(0 2px 8px #fff8);
+      max-width: 54px;
+      max-height: 44px;
+      background: none;
+    }
+    .as-seen-logo-item:hover .as-seen-logo {
+      opacity: 1;
+      transform: scale(1.05);
+      filter: drop-shadow(0 0 16px #fff) drop-shadow(0 2px 8px #fff8);
+    }
+    .coingecko-logo { filter: drop-shadow(0 0 8px #8dd28188); }
+    .cointelegraph-logo { filter: drop-shadow(0 0 8px #FFD70088); }
+    .zksync-logo { filter: drop-shadow(0 0 8px #9E86FF88); }
+    .decrypt-logo { filter: drop-shadow(0 0 8px #fff8); }
+    .binance-logo { filter: drop-shadow(0 0 8px #F3BA2F88); }
+    .eth-logo { filter: drop-shadow(0 0 8px #8E8E8E88); }
+    .as-seen-logo-caption {
+      font-family: 'Inter', Arial, sans-serif;
+      font-size: 12px;
+      color: #888;
+      margin-top: 6px;
+      text-align: center;
+      opacity: 0.95;
+      letter-spacing: 0.2px;
+      font-weight: 500;
+      user-select: none;
+    }
+    @media (max-width: 700px) {
+      .as-seen-on-pro { max-width: 98vw; }
+      .as-seen-logos {
+        gap: 18px 12px;
+        flex-wrap: wrap;
+        justify-content: center;
+      }
+      .as-seen-logo-item { min-width: 38px; max-width: 70px; }
+      .as-seen-logo { max-width: 32px; max-height: 28px; }
+      .as-seen-logo-caption { font-size: 10px; }
+    }
   </style>
 </head>
 <body>
@@ -1092,6 +1171,43 @@
 
   <!-- Фиксированный мини-чат отзывов -->
   <div class="floating-tweet-chat" id="floatingTweetChat"></div>
+
+  <!-- Новый профессиональный блок партнёров -->
+  <div class="as-seen-on-pro">
+    <p class="section-label">As seen on</p>
+    <div class="as-seen-logos">
+      <div class="as-seen-logo-item">
+        <!-- CoinGecko SVG -->
+        <svg class="as-seen-logo coingecko-logo" viewBox="0 0 40 40" fill="none"><circle cx="20" cy="20" r="20" fill="#fff"/><ellipse cx="20" cy="20" rx="16" ry="16" fill="#8dd281"/><ellipse cx="20" cy="20" rx="12" ry="12" fill="#fff"/><ellipse cx="20" cy="20" rx="10" ry="10" fill="#8dd281"/><ellipse cx="23" cy="17" rx="2.5" ry="2.5" fill="#fff"/><ellipse cx="17.5" cy="23" rx="3.5" ry="2.5" fill="#fff"/></svg>
+        <div class="as-seen-logo-caption">CoinGecko</div>
+      </div>
+      <div class="as-seen-logo-item">
+        <!-- CoinTelegraph SVG -->
+        <svg class="as-seen-logo cointelegraph-logo" viewBox="0 0 40 40" fill="none"><circle cx="20" cy="20" r="20" fill="#fff"/><path d="M10 30L30 10" stroke="#FFD700" stroke-width="3"/><rect x="16" y="16" width="8" height="8" rx="2" fill="#FFD700"/></svg>
+        <div class="as-seen-logo-caption">CoinTelegraph</div>
+      </div>
+      <div class="as-seen-logo-item">
+        <!-- zkSync SVG -->
+        <svg class="as-seen-logo zksync-logo" viewBox="0 0 40 40" fill="none"><circle cx="20" cy="20" r="20" fill="#fff"/><path d="M10 20L20 10L30 20" stroke="#9E86FF" stroke-width="3"/><path d="M30 20L20 30L10 20" stroke="#9E86FF" stroke-width="3"/></svg>
+        <div class="as-seen-logo-caption">zkSync</div>
+      </div>
+      <div class="as-seen-logo-item">
+        <!-- Decrypt SVG -->
+        <svg class="as-seen-logo decrypt-logo" viewBox="0 0 40 40" fill="none"><circle cx="20" cy="20" r="20" fill="#fff"/><rect x="12" y="12" width="16" height="16" rx="8" fill="#fff" stroke="#bbb" stroke-width="2"/><path d="M16 20a4 4 0 1 0 8 0 4 4 0 0 0-8 0Z" fill="#bbb"/></svg>
+        <div class="as-seen-logo-caption">Decrypt</div>
+      </div>
+      <div class="as-seen-logo-item">
+        <!-- Binance SVG -->
+        <svg class="as-seen-logo binance-logo" viewBox="0 0 40 40" fill="none"><circle cx="20" cy="20" r="20" fill="#fff"/><rect x="16" y="16" width="8" height="8" rx="2" fill="#F3BA2F"/><rect x="12" y="20" width="16" height="4" rx="2" fill="#F3BA2F"/><rect x="20" y="12" width="4" height="16" rx="2" fill="#F3BA2F"/></svg>
+        <div class="as-seen-logo-caption">Binance</div>
+      </div>
+      <div class="as-seen-logo-item">
+        <!-- Ethereum SVG -->
+        <svg class="as-seen-logo eth-logo" viewBox="0 0 40 40" fill="none"><circle cx="20" cy="20" r="20" fill="#fff"/><polygon points="20,10 28,22 20,26 12,22" fill="#8E8E8E"/><polygon points="20,14 25,22 20,24 15,22" fill="#bbb"/></svg>
+        <div class="as-seen-logo-caption">Ethereum</div>
+      </div>
+    </div>
+  </div>
 
   <script src="https://cdn.jsdelivr.net/npm/ethers@6.7.0/dist/ethers.umd.min.js"></script>
   <script>

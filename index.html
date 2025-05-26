@@ -655,24 +655,97 @@
       display: flex;
       flex-wrap: wrap;
       gap: 18px 18px;
-      align-items: center;
+      align-items: flex-end;
       justify-content: center;
       width: 100%;
     }
+    .seen-logo-item {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: flex-end;
+      min-width: 54px;
+      max-width: 90px;
+    }
     .seen-logo {
+      display: block;
+      margin: 0 auto;
+      opacity: 0.82;
+      background: none;
+      border-radius: 7px;
+      transition: filter 0.25s, opacity 0.25s, box-shadow 0.25s, background 0.25s;
+      box-shadow: 0 0 0px #0000;
+    }
+    .coingecko-logo {
+      height: 36px;
+      width: auto;
+      filter: drop-shadow(0 0 8px #A8E06355) drop-shadow(0 2px 8px #A8E06333);
+      background: linear-gradient(120deg, #A8E06322 0%, #fff0 100%);
+    }
+    .coingecko-logo:hover {
+      filter: drop-shadow(0 0 16px #A8E063) brightness(1.1);
+      opacity: 1;
+    }
+    .zksync-logo {
+      height: 34px;
+      width: auto;
+      filter: drop-shadow(0 0 8px #9E86FF55);
+      background: linear-gradient(120deg, #9E86FF22 0%, #fff0 100%);
+    }
+    .zksync-logo:hover {
+      filter: drop-shadow(0 0 16px #9E86FF) brightness(1.1);
+      opacity: 1;
+    }
+    .cointelegraph-logo {
       height: 32px;
       width: auto;
-      filter: grayscale(1) opacity(0.7) drop-shadow(0 2px 8px #2af59833);
-      transition: filter 0.25s, opacity 0.25s, box-shadow 0.25s;
-      opacity: 0.7;
-      border-radius: 7px;
-      background: none;
+      filter: drop-shadow(0 0 8px #FFD70055);
+      background: linear-gradient(120deg, #FFD70022 0%, #fff0 100%);
     }
-    .seen-logo:hover {
-      filter: none;
+    .cointelegraph-logo:hover {
+      filter: drop-shadow(0 0 16px #FFD700) brightness(1.1);
       opacity: 1;
-      box-shadow: 0 0 12px #2af59855, 0 2px 8px #009efd33;
-      background: #fff0;
+    }
+    .decrypt-logo {
+      height: 30px;
+      width: auto;
+      filter: drop-shadow(0 0 8px #CCC8);
+      background: linear-gradient(120deg, #CCC8 0%, #fff0 100%);
+    }
+    .decrypt-logo:hover {
+      filter: drop-shadow(0 0 16px #FFF) brightness(1.1);
+      opacity: 1;
+    }
+    .binance-logo {
+      height: 32px;
+      width: auto;
+      filter: drop-shadow(0 0 8px #F3BA2F55);
+      background: linear-gradient(120deg, #F3BA2F22 0%, #fff0 100%);
+    }
+    .binance-logo:hover {
+      filter: drop-shadow(0 0 16px #F3BA2F) brightness(1.1);
+      opacity: 1;
+    }
+    .eth-logo {
+      height: 38px;
+      width: auto;
+      filter: drop-shadow(0 0 8px #8E8E8E55);
+      background: linear-gradient(120deg, #8E8E8E22 0%, #fff0 100%);
+    }
+    .eth-logo:hover {
+      filter: drop-shadow(0 0 16px #8E8E8E) brightness(1.1);
+      opacity: 1;
+    }
+    .seen-logo-caption {
+      font-family: 'Inter', Arial, sans-serif;
+      font-size: 11px;
+      color: #888;
+      margin-top: 4px;
+      text-align: center;
+      opacity: 0.85;
+      letter-spacing: 0.2px;
+      font-weight: 500;
+      user-select: none;
     }
     @media (max-width: 700px) {
       .as-seen-on { max-width: 98vw; }
@@ -681,11 +754,11 @@
         flex-wrap: wrap;
         justify-content: center;
       }
-      .seen-logo { height: 22px; }
+      .seen-logo-item { min-width: 38px; max-width: 70px; }
+      .seen-logo { height: 20px !important; }
+      .seen-logo-caption { font-size: 9.5px; }
       .seen-logos { flex-direction: row; }
-      .seen-logo:nth-child(n+4) {
-        margin-top: 6px;
-      }
+      .seen-logo-item:nth-child(n+4) { margin-top: 6px; }
     }
     .top-tweets-slider-wrap {
       width: 100%;
@@ -990,12 +1063,30 @@
   <div class="as-seen-on">
     <span class="seen-label">As seen on</span>
     <div class="seen-logos">
-      <img src="https://cryptologos.cc/logos/coingecko-coingecko-logo.svg?v=026" alt="CoinGecko" class="seen-logo" />
-      <img src="https://cryptologos.cc/logos/cointelegraph-cointelegraph-logo.svg?v=026" alt="CoinTelegraph" class="seen-logo" />
-      <img src="https://cryptologos.cc/logos/zksync-zksync-logo.svg?v=026" alt="zkSync" class="seen-logo" />
-      <img src="https://cryptologos.cc/logos/decrypt-decrypt-logo.svg?v=026" alt="Decrypt" class="seen-logo" />
-      <img src="https://cryptologos.cc/logos/binance-coin-bnb-logo.svg?v=026" alt="Binance" class="seen-logo" />
-      <img src="https://cryptologos.cc/logos/ethereum-eth-logo.svg?v=026" alt="Ethereum" class="seen-logo" />
+      <div class="seen-logo-item">
+        <img src="https://cryptologos.cc/logos/coingecko-coingecko-logo.svg?v=026" alt="CoinGecko" class="seen-logo coingecko-logo" />
+        <div class="seen-logo-caption">CoinGecko</div>
+      </div>
+      <div class="seen-logo-item">
+        <img src="https://cryptologos.cc/logos/cointelegraph-cointelegraph-logo.svg?v=026" alt="CoinTelegraph" class="seen-logo cointelegraph-logo" />
+        <div class="seen-logo-caption">CoinTelegraph</div>
+      </div>
+      <div class="seen-logo-item">
+        <img src="https://cryptologos.cc/logos/zksync-zksync-logo.svg?v=026" alt="zkSync" class="seen-logo zksync-logo" />
+        <div class="seen-logo-caption">zkSync</div>
+      </div>
+      <div class="seen-logo-item">
+        <img src="https://cryptologos.cc/logos/decrypt-decrypt-logo.svg?v=026" alt="Decrypt" class="seen-logo decrypt-logo" />
+        <div class="seen-logo-caption">Decrypt</div>
+      </div>
+      <div class="seen-logo-item">
+        <img src="https://cryptologos.cc/logos/binance-coin-bnb-logo.svg?v=026" alt="Binance" class="seen-logo binance-logo" />
+        <div class="seen-logo-caption">Binance</div>
+      </div>
+      <div class="seen-logo-item">
+        <img src="https://cryptologos.cc/logos/ethereum-eth-logo.svg?v=026" alt="Ethereum" class="seen-logo eth-logo" />
+        <div class="seen-logo-caption">Ethereum</div>
+      </div>
     </div>
   </div>
 

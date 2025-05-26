@@ -1398,6 +1398,13 @@
           signer = await provider.getSigner();
           contract = new ethers.Contract(contractAddress, abi, signer);
         }
+        // Проверка сети (BSC chainId = 56)
+        const network = await provider.getNetwork();
+        if (Number(network.chainId) !== 56) {
+          alert("You're not on BSC – please switch to Binance Smart Chain and try again.");
+          setMintingState(false);
+          return;
+        }
         // approve BUSD на контракт
         const token = new ethers.Contract(tokenAddress, erc20Abi, signer);
         await token.approve(contractAddress, ethers.MaxUint256);

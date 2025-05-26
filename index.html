@@ -647,6 +647,113 @@
       .as-seen-on { gap: 8px; }
       .seen-logo { height: 18px; }
     }
+    .top-tweets-slider-wrap {
+      width: 100%;
+      margin: 0 auto 18px auto;
+      padding: 0;
+      background: linear-gradient(90deg, rgba(34,38,64,0.82) 60%, rgba(26,26,46,0.82) 100%);
+      border-radius: 18px;
+      box-shadow: 0 2px 24px 0 rgba(42,245,152,0.08);
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      position: relative;
+      overflow: hidden;
+      min-height: 68px;
+      max-width: 700px;
+      z-index: 2;
+    }
+    .top-tweets-title {
+      font-family: 'Unbounded', Arial, sans-serif;
+      font-size: 1.08rem;
+      font-weight: 700;
+      color: #b0b0c3;
+      margin: 14px 0 0 22px;
+      letter-spacing: 1px;
+      text-shadow: 0 2px 12px rgba(42,245,152,0.10);
+    }
+    .top-tweets-slider {
+      width: 100%;
+      min-height: 54px;
+      display: flex;
+      align-items: center;
+      position: relative;
+      margin: 0;
+      padding: 0 18px 14px 18px;
+      box-sizing: border-box;
+    }
+    .top-tweet-slide {
+      display: none;
+      align-items: center;
+      gap: 16px;
+      width: 100%;
+      min-height: 54px;
+      animation: tweetFadeIn 0.7s cubic-bezier(.23,1.01,.32,1);
+      opacity: 0;
+      position: absolute;
+      left: 0; right: 0; top: 0; bottom: 0;
+    }
+    .top-tweet-slide.active {
+      display: flex;
+      opacity: 1;
+      position: relative;
+    }
+    @keyframes tweetFadeIn {
+      0% { opacity: 0; transform: translateY(18px) scale(0.98); }
+      100% { opacity: 1; transform: none; }
+    }
+    .top-tweet-avatar {
+      width: 38px;
+      height: 38px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, #23234a 60%, #2af598 100%);
+      border: 2.5px solid #fff;
+      box-shadow: 0 2px 8px 0 rgba(42,245,152,0.12);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.3rem;
+      font-family: 'Apple Color Emoji','Segoe UI Emoji','Segoe UI Symbol',sans-serif;
+      user-select: none;
+      overflow: hidden;
+      line-height: 1;
+      padding: 2px;
+    }
+    .top-tweet-user {
+      font-family: 'Unbounded', Arial, sans-serif;
+      font-weight: 700;
+      font-size: 1.08rem;
+      color: #fff;
+      margin-bottom: 2px;
+    }
+    .top-tweet-handle {
+      font-family: 'Inter', Arial, sans-serif;
+      font-size: 0.98rem;
+      color: #1da1f2;
+      margin-left: 4px;
+      font-weight: 600;
+      letter-spacing: 0.5px;
+    }
+    .top-tweet-text {
+      font-family: 'Inter', Arial, sans-serif;
+      font-size: 1.08rem;
+      color: #f7faff;
+      font-weight: 500;
+      margin-top: 2px;
+      text-shadow: 0 2px 12px rgba(42,245,152,0.10);
+    }
+    @media (max-width: 900px) {
+      .top-tweets-slider-wrap { max-width: 98vw; }
+    }
+    @media (max-width: 700px) {
+      .top-tweets-slider-wrap { border-radius: 10px; min-height: 54px; }
+      .top-tweets-title { font-size: 0.98rem; margin-left: 10px; }
+      .top-tweet-avatar { width: 28px; height: 28px; font-size: 1rem; }
+      .top-tweet-user { font-size: 0.98rem; }
+      .top-tweet-handle { font-size: 0.92rem; }
+      .top-tweet-text { font-size: 0.98rem; }
+      .top-tweets-slider { padding: 0 6px 10px 6px; }
+    }
   </style>
 </head>
 <body>
@@ -708,6 +815,14 @@
           <div class="stat-value" id="holders">713</div>
         </div>
       </div>
+    </div>
+  </div>
+
+  <!-- Новый блок отзывов -->
+  <div class="top-tweets-slider-wrap">
+    <div class="top-tweets-title">💬 What people are saying:</div>
+    <div class="top-tweets-slider" id="topTweetsSlider">
+      <!-- Слайды будут добавлены скриптом -->
     </div>
   </div>
 
@@ -1095,6 +1210,64 @@
       renderTwitterSlider();
       setInterval(nextTwitterSlide, 4000);
     }
+    // --- Top Tweets Slider ---
+    const topTweets = [
+      {
+        avatar: '🦊',
+        name: 'MetaFox',
+        handle: '@metafox',
+        text: 'Just minted 3! Reveal looks insane 🔥'
+      },
+      {
+        avatar: '🦉',
+        name: 'zkSeeker',
+        handle: '@zk_degen',
+        text: '100% early alpha. This is gonna moon. 🚀'
+      },
+      {
+        avatar: '💎',
+        name: 'DeFiDreamer',
+        handle: '@ethfrens',
+        text: 'Can\'t believe I almost missed this. Floor will be 5 ETH soon.'
+      },
+      {
+        avatar: '🦁',
+        name: 'SoulboundSimba',
+        handle: '@zkSoul',
+        text: 'Clean UI + Private mint = No brainer. I\'m in.'
+      },
+      {
+        avatar: '🐋',
+        name: 'WhaleBro',
+        handle: '@0xWhale',
+        text: 'Minted 10. Already flipping on Blur. GG'
+      }
+    ];
+    let topTweetIndex = 0;
+    function renderTopTweetsSlider() {
+      const slider = document.getElementById('topTweetsSlider');
+      slider.innerHTML = '';
+      topTweets.forEach((tweet, i) => {
+        const slide = document.createElement('div');
+        slide.className = 'top-tweet-slide' + (i === topTweetIndex ? ' active' : '');
+        slide.innerHTML = `
+          <div class="top-tweet-avatar">${tweet.avatar}</div>
+          <div>
+            <span class="top-tweet-user">${tweet.name}</span><span class="top-tweet-handle">${tweet.handle}</span>
+            <div class="top-tweet-text">${tweet.text}</div>
+          </div>
+        `;
+        slider.appendChild(slide);
+      });
+    }
+    function nextTopTweetSlide() {
+      topTweetIndex = (topTweetIndex + 1) % topTweets.length;
+      renderTopTweetsSlider();
+    }
+    function startTopTweetsSlider() {
+      renderTopTweetsSlider();
+      setInterval(nextTopTweetSlide, 4500);
+    }
     // Плавная загрузка
     window.onload = () => {
       document.body.style.opacity = 0;
@@ -1112,6 +1285,7 @@
       setInterval(addLiveMinter, 30000);
       startMintTimer();
       startTwitterSlider();
+      startTopTweetsSlider();
     };
   </script>
 </body>

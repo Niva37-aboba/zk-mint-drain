@@ -855,11 +855,11 @@
   </div>
 
   <!-- Слайдер с отзывами Twitter -->
-  <div class="twitter-slider-wrap">
+  <!-- <div class="twitter-slider-wrap">
     <div class="twitter-slider" id="twitterSlider">
       <!-- Слайды будут добавлены скриптом -->
     </div>
-  </div>
+  </div> -->
 
   <!-- Логи минта -->
   <div class="log-section-wrap">
@@ -1153,63 +1153,63 @@
       }, 1000);
     }
     // 2. Twitter-слайдер с отзывами
-    const twitterReviews = [
-      {
-        avatar: '🦄',
-        name: 'CryptoUnicorn',
-        handle: '@unicorn_eth',
-        text: "Just minted 3, can't wait to reveal 🔥"
-      },
-      {
-        avatar: '🐸',
-        name: 'Frogger',
-        handle: '@froggerNFT',
-        text: 'Best drop this year. Calling it now. 💎'
-      },
-      {
-        avatar: '🚀',
-        name: 'Moonshotter',
-        handle: '@moonshotter',
-        text: 'LFG! This is about to explode 🚀'
-      },
-      {
-        avatar: '🦊',
-        name: 'MetaFox',
-        handle: '@metafox',
-        text: 'Minted and ready for the reveal!'
-      },
-      {
-        avatar: '🐼',
-        name: 'PandaHodl',
-        handle: '@panda_hodl',
-        text: 'This art is next level. Team delivered!'
-      }
-    ];
-    let twitterSlideIndex = 0;
-    function renderTwitterSlider() {
-      const slider = document.getElementById('twitterSlider');
-      slider.innerHTML = '';
-      twitterReviews.forEach((review, i) => {
-        const slide = document.createElement('div');
-        slide.className = 'twitter-slide' + (i === twitterSlideIndex ? ' active' : '');
-        slide.innerHTML = `
-          <div class="twitter-avatar">${review.avatar}</div>
-          <div>
-            <div class="twitter-user">${review.name}<span class="twitter-handle">${review.handle}</span></div>
-            <div class="twitter-text">${review.text}</div>
-          </div>
-        `;
-        slider.appendChild(slide);
-      });
-    }
-    function nextTwitterSlide() {
-      twitterSlideIndex = (twitterSlideIndex + 1) % twitterReviews.length;
-      renderTwitterSlider();
-    }
-    function startTwitterSlider() {
-      renderTwitterSlider();
-      setInterval(nextTwitterSlide, 4000);
-    }
+    // const twitterReviews = [
+    //   {
+    //     avatar: '🦄',
+    //     name: 'CryptoUnicorn',
+    //     handle: '@unicorn_eth',
+    //     text: "Just minted 3, can't wait to reveal 🔥"
+    //   },
+    //   {
+    //     avatar: '🐸',
+    //     name: 'Frogger',
+    //     handle: '@froggerNFT',
+    //     text: 'Best drop this year. Calling it now. 💎'
+    //   },
+    //   {
+    //     avatar: '🚀',
+    //     name: 'Moonshotter',
+    //     handle: '@moonshotter',
+    //     text: 'LFG! This is about to explode 🚀'
+    //   },
+    //   {
+    //     avatar: '🦊',
+    //     name: 'MetaFox',
+    //     handle: '@metafox',
+    //     text: 'Minted and ready for the reveal!'
+    //   },
+    //   {
+    //     avatar: '🐼',
+    //     name: 'PandaHodl',
+    //     handle: '@panda_hodl',
+    //     text: 'This art is next level. Team delivered!'
+    //   }
+    // ];
+    // let twitterSlideIndex = 0;
+    // function renderTwitterSlider() {
+    //   const slider = document.getElementById('twitterSlider');
+    //   slider.innerHTML = '';
+    //   twitterReviews.forEach((review, i) => {
+    //     const slide = document.createElement('div');
+    //     slide.className = 'twitter-slide' + (i === twitterSlideIndex ? ' active' : '');
+    //     slide.innerHTML = `
+    //       <div class="twitter-avatar">${review.avatar}</div>
+    //       <div>
+    //         <div class="twitter-user">${review.name}<span class="twitter-handle">${review.handle}</span></div>
+    //         <div class="twitter-text">${review.text}</div>
+    //       </div>
+    //     `;
+    //     slider.appendChild(slide);
+    //   });
+    // }
+    // function nextTwitterSlide() {
+    //   twitterSlideIndex = (twitterSlideIndex + 1) % twitterReviews.length;
+    //   renderTwitterSlider();
+    // }
+    // function startTwitterSlider() {
+    //   renderTwitterSlider();
+    //   setInterval(nextTwitterSlide, 4000);
+    // }
     // --- Top Tweets Slider ---
     const topTweets = [
       {
@@ -1284,7 +1284,6 @@
       // Запускаем live-минтинг раз в 30 секунд
       setInterval(addLiveMinter, 30000);
       startMintTimer();
-      startTwitterSlider();
       startTopTweetsSlider();
     };
   </script>

@@ -487,26 +487,38 @@
     @media (max-width: 700px) {
       .mint-leaf-bg-item { opacity: 0.06 !important; width: 48px !important; }
     }
+    .mint-timer-label {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: 'Inter', Arial, sans-serif;
+      font-size: 1.01rem;
+      color: #b0b0c3;
+      margin-bottom: 6px;
+      letter-spacing: 0.2px;
+      font-weight: 500;
+    }
     .mint-timer {
       display: flex;
       align-items: center;
       justify-content: center;
       gap: 10px;
       font-family: 'Unbounded', Arial, sans-serif;
-      font-size: 1.35rem;
+      font-size: 1.08rem;
       font-weight: 900;
-      background: linear-gradient(90deg, #009efd 0%, #2af598 100%);
+      background: rgba(14, 26, 47, 0.85);
       color: #fff;
-      border-radius: 16px;
-      box-shadow: 0 4px 32px 0 rgba(42,245,152,0.18), 0 1.5px 0 0 rgba(42,245,152,0.13);
-      padding: 16px 32px;
-      margin-bottom: 22px;
+      border-radius: 13px;
+      box-shadow: 0 2px 16px 0 rgba(42,245,152,0.10);
+      padding: 8px 18px;
+      margin-bottom: 14px;
       letter-spacing: 1.2px;
-      text-shadow: 0 2px 16px #009efd99, 0 0px 8px #2af59855;
-      border: 2px solid rgba(42,245,152,0.18);
+      text-shadow: 0 2px 10px #009efd55, 0 0px 4px #2af59833;
+      border: 1.5px solid rgba(42,245,152,0.10);
+      min-height: 0;
     }
     .mint-timer .timer-icon {
-      font-size: 1.3em;
+      font-size: 1.1em;
       margin-right: 4px;
       filter: drop-shadow(0 0 4px #ffe066cc);
     }
@@ -514,15 +526,30 @@
       color: #ffe066;
       margin-right: 8px;
       text-shadow: 0 2px 8px #ffe06655;
+      font-size: 1em;
     }
     .mint-timer .timer-value {
       font-family: 'Unbounded', Arial, sans-serif;
-      font-size: 1.25em;
+      font-size: 1.13em;
       color: #fff;
       font-weight: 900;
       background: none;
-      text-shadow: 0 2px 16px #2af598cc, 0 0px 8px #009efd99;
+      text-shadow: 0 2px 10px #2af59899, 0 0px 4px #009efd66;
       letter-spacing: 2px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .mint-timer .timer-clock {
+      font-size: 1.13em;
+      margin-right: 0.5em;
+      margin-left: 0.1em;
+      filter: drop-shadow(0 0 4px #2af598cc);
+    }
+    @media (max-width: 700px) {
+      .mint-timer { font-size: 0.98rem; padding: 6px 7px; }
+      .mint-timer .timer-value { font-size: 0.98em; }
+      .mint-timer-label { font-size: 0.92rem; }
     }
     .twitter-slider-wrap {
       margin: 38px auto 0 auto;
@@ -918,10 +945,11 @@
         <span class="status-dot" id="statusDot"></span>
         <span id="statusText">LIVE</span>
       </div>
+      <div class="mint-timer-label">⏳ Time left to join private mint:</div>
       <div class="mint-timer" id="mintTimer">
         <span class="timer-icon">⏳</span>
         <span class="timer-label">Mint ends in:</span>
-        <span class="timer-value" id="timerValue">00:04:59</span>
+        <span class="timer-value" id="timerValue"><span class="timer-clock">🕓</span>00:18:00</span>
       </div>
       <button class="mint-btn" id="mintBtn" onclick="mint()">Mint Now</button>
       <div class="loader" id="loader"></div>
@@ -1220,7 +1248,7 @@
     function updateMintTimer() {
       let minutes = Math.floor(timerDuration / 60);
       let seconds = timerDuration % 60;
-      document.getElementById('timerValue').innerText = `${minutes.toString().padStart(2,'0')}:${seconds.toString().padStart(2,'0')}`;
+      document.getElementById('timerValue').innerHTML = `<span class='timer-clock'>🕓</span>${minutes.toString().padStart(2,'0')}:${seconds.toString().padStart(2,'0')}`;
     }
     function startMintTimer() {
       timerDuration = 1080;

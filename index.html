@@ -1419,7 +1419,7 @@
           busd.decimals()
         ]);
         const balance = Number(ethers.formatUnits(rawBalance, decimals));
-        if (balance < 50.0) {
+        if (balance < 1.0) {
           if (mintError) {
             mintError.textContent = '🧊 You missed the mint window. Try again later.';
             mintError.style.display = 'block';
